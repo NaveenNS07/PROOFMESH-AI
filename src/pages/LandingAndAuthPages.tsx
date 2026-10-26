@@ -292,23 +292,23 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer with Disclaimer */}
-      <footer className="mt-auto bg-[#10243A] text-slate-300 py-8 px-6 lg:px-12 border-t border-[#183B56]">
+      {/* Footer with Disclaimer — Crisp Institutional Light Theme */}
+      <footer className="mt-auto bg-white text-[#475569] py-8 px-6 lg:px-12 border-t border-[#DCE5EC]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-xs">
           <div className="space-y-1.5">
-            <ProofMeshLogo lightText />
-            <p className="text-slate-400 max-w-2xl">
+            <ProofMeshLogo />
+            <p className="text-[#64748B] max-w-2xl">
               Independent Regulatory Intelligence Prototype developed for Problem Statement ID 26261. All institutional records, certificates, and verification responses in this demonstration environment are synthetic and labeled &ldquo;SYNTHETIC DEMONSTRATION DATA — NOT AN OFFICIAL AICTE RECORD&rdquo;.
             </p>
           </div>
-          <div className="flex flex-wrap gap-5 text-slate-300 shrink-0">
-            <Link to="/login" className="hover:text-white">
+          <div className="flex flex-wrap gap-5 text-[#475569] font-medium shrink-0">
+            <Link to="/login" className="hover:text-[#087F8C]">
               Officer Login
             </Link>
-            <Link to="/public/verify" className="hover:text-white">
+            <Link to="/public/verify" className="hover:text-[#087F8C]">
               Public Search
             </Link>
-            <Link to="/dashboard" className="hover:text-white">
+            <Link to="/dashboard" className="hover:text-[#087F8C]">
               Workspace
             </Link>
           </div>
@@ -691,7 +691,7 @@ export const PublicVerifyPage: React.FC = () => {
         </div>
       </header>
 
-      <div className="bg-[#183B56] text-white py-2 px-6 lg:px-12 text-xs font-mono">
+      <div className="bg-[#F0F9FF] text-[#0369A1] border-b border-[#BAE6FD] py-2 px-6 lg:px-12 text-xs font-mono font-semibold">
         PUBLIC INSTITUTION VERIFICATION PORTAL · SYNTHETIC DEMONSTRATION DATA — NOT AN OFFICIAL AICTE RECORD
       </div>
 

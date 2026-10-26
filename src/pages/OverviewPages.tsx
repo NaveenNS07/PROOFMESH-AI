@@ -135,10 +135,10 @@ export const DashboardPage: React.FC = () => {
   if (loading || !data) {
     return (
       <div className="space-y-4">
-        <div className="h-20 bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-6 animate-pulse" />
+        <div className="h-20 bg-white border border-[#DCE5EC] rounded-xl p-6 animate-pulse" />
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="h-24 bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-4 animate-pulse" />
+            <div key={i} className="h-24 bg-white border border-[#DCE5EC] rounded-xl p-4 animate-pulse" />
           ))}
         </div>
       </div>
@@ -147,28 +147,33 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Workspace Welcome & Header */}
-      <div className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 flex flex-wrap items-center justify-between gap-4">
-        <div className="space-y-1">
-          <div className="text-xs text-[#617384] dark:text-slate-300">
-            Regulatory Scrutiny Workspace · Evaluation Date Benchmark: 2026-10-26 · {currentUser.department}
+      {/* Workspace Welcome & Header — Executive Light Command Card */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-white via-[#F0F9FF]/90 to-[#F0FDFA]/90 border border-[#BFDBFE] rounded-2xl p-6 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#2563EB] via-[#0D9488] to-[#10B981]" />
+        <div className="space-y-1.5">
+          <div className="inline-flex items-center gap-2 text-xs font-semibold text-[#1E40AF] bg-[#EFF6FF] border border-[#BFDBFE] px-2.5 py-0.5 rounded-full">
+            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+            <span>Regulatory Scrutiny Workspace · Evaluation Date Benchmark: 2026-10-26 · {currentUser.department}</span>
           </div>
-          <h1 className="font-display text-xl font-bold text-[#10243A] dark:text-white">
+          <h1 className="font-display text-2xl font-extrabold text-[#0F172A] tracking-tight">
             Welcome, {currentUser.fullName}
           </h1>
+          <p className="text-xs text-[#475569]">
+            6-Layer Deterministic Compliance Engine &amp; Claim-to-Evidence Graph Intelligence Active
+          </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <button
             type="button"
             onClick={loadSummary}
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-[#F4F7FA] dark:bg-[#16304B] border border-[#DCE5EC] dark:border-[#213D5B] rounded hover:bg-[#DCE5EC]/50 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-[#0F172A] bg-white border border-[#CBD5E1] rounded-xl shadow-2xs hover:bg-[#F8FAFC] hover:border-[#94A3B8] transition-all cursor-pointer"
           >
-            <RefreshCw className="w-3.5 h-3.5" />
+            <RefreshCw className="w-3.5 h-3.5 text-[#0D9488]" />
             <span>Refresh Live Metrics</span>
           </button>
           <Link
             to="/evidence-graph"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-[#087F8C] hover:bg-[#10243A] rounded transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-[#1E3A8A] via-[#0F4C81] to-[#0D9488] hover:from-[#1D4ED8] hover:to-[#0F766E] rounded-xl shadow-sm hover:shadow transition-all"
           >
             <span>Open Claim-to-Evidence Graph</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -176,38 +181,85 @@ export const DashboardPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 6 Summary Indicators (All live from backend) */}
+      {/* 6 Summary Indicators (All live from backend with semantic accent borders & hover elevation) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
         {[
-          { label: 'Total Applications', value: data.indicators.totalApplications, sub: 'In current scope' },
-          { label: 'Awaiting Review', value: data.indicators.awaitingReview, sub: 'Officer scrutiny queue' },
-          { label: 'Unresolved Discrepancies', value: data.indicators.unresolvedDiscrepancies, sub: 'Cases with open findings' },
-          { label: 'Source Verification Pending', value: data.indicators.sourceVerificationPending, sub: 'Adapter or manual check' },
-          { label: 'Additional Evidence Req.', value: data.indicators.requiringAdditionalEvidence, sub: 'Awaiting institution' },
-          { label: 'Reviews Completed', value: data.indicators.reviewsCompleted, sub: 'Ready for committee' },
+          {
+            label: 'Total Applications',
+            value: data.indicators.totalApplications,
+            sub: 'In current scope',
+            topBorder: 'border-t-4 border-t-blue-600',
+            badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
+            tag: 'PORTFOLIO',
+          },
+          {
+            label: 'Awaiting Review',
+            value: data.indicators.awaitingReview,
+            sub: 'Officer scrutiny queue',
+            topBorder: 'border-t-4 border-t-amber-500',
+            badgeBg: 'bg-amber-50 text-amber-800 border-amber-200',
+            tag: 'ACTIVE QUEUE',
+          },
+          {
+            label: 'Unresolved Discrepancies',
+            value: data.indicators.unresolvedDiscrepancies,
+            sub: 'Cases with open findings',
+            topBorder: 'border-t-4 border-t-rose-600',
+            badgeBg: 'bg-rose-50 text-rose-700 border-rose-200',
+            tag: 'HIGH PRIORITY',
+          },
+          {
+            label: 'Source Verification Pending',
+            value: data.indicators.sourceVerificationPending,
+            sub: 'Adapter or manual check',
+            topBorder: 'border-t-4 border-t-indigo-600',
+            badgeBg: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+            tag: 'GATEWAY',
+          },
+          {
+            label: 'Additional Evidence Req.',
+            value: data.indicators.requiringAdditionalEvidence,
+            sub: 'Awaiting institution',
+            topBorder: 'border-t-4 border-t-orange-500',
+            badgeBg: 'bg-orange-50 text-orange-800 border-orange-200',
+            tag: 'CLARIFICATION',
+          },
+          {
+            label: 'Reviews Completed',
+            value: data.indicators.reviewsCompleted,
+            sub: 'Ready for committee',
+            topBorder: 'border-t-4 border-t-emerald-600',
+            badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+            tag: 'CLEARED',
+          },
         ].map((kpi) => (
           <div
             key={kpi.label}
-            className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-4 space-y-1.5"
+            className={`pm-card-interactive p-4 space-y-2 ${kpi.topBorder}`}
           >
-            <div className="text-xs font-medium text-[#617384] dark:text-slate-300">{kpi.label}</div>
-            <div className="font-mono text-2xl font-bold text-[#10243A] dark:text-white tabular-nums">
+            <div className="flex items-center justify-between gap-1">
+              <span className={`font-mono text-[9px] font-bold px-1.5 py-0.5 rounded border ${kpi.badgeBg}`}>
+                {kpi.tag}
+              </span>
+            </div>
+            <div className="text-xs font-semibold text-[#334155] leading-snug">{kpi.label}</div>
+            <div className="font-mono text-3xl font-extrabold text-[#0F172A] tabular-nums tracking-tight">
               {kpi.value}
             </div>
-            <div className="text-[11px] text-[#617384] dark:text-slate-400">{kpi.sub}</div>
+            <div className="text-[11px] font-medium text-[#64748B]">{kpi.sub}</div>
           </div>
         ))}
       </div>
 
       {/* Application Processing Overview Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-6 bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 space-y-4">
+        <div className="lg:col-span-6 pm-card p-5 space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="font-display text-sm font-bold text-[#10243A] dark:text-white">
-                Applications Received & Validated Over Time
+              <h2 className="font-display text-sm font-bold text-[#0F172A]">
+                Applications Received &amp; Validated Over Time
               </h2>
-              <p className="text-xs text-[#617384] dark:text-slate-300">
+              <p className="text-xs text-[#64748B]">
                 Average Automated Processing Time: {data.processingOverview.averageProcessingHours} mins/package
               </p>
             </div>
@@ -215,34 +267,34 @@ export const DashboardPage: React.FC = () => {
           <div className="h-52 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data.processingOverview.intakeTimeline}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#DCE5EC" />
-                <XAxis dataKey="period" tick={{ fontSize: 11 }} />
-                <YAxis tick={{ fontSize: 11 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
+                <XAxis dataKey="period" tick={{ fontSize: 11, fill: '#475569' }} />
+                <YAxis tick={{ fontSize: 11, fill: '#475569' }} />
                 <Tooltip />
-                <Bar dataKey="received" name="Applications Received" fill="#10243A" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="validated" name="Validation Completed" fill="#087F8C" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="received" name="Applications Received" fill="#2563EB" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="validated" name="Validation Completed" fill="#0D9488" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        <div className="lg:col-span-6 bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 space-y-4">
+        <div className="lg:col-span-6 pm-card p-5 space-y-4">
           <div>
-            <h2 className="font-display text-sm font-bold text-[#10243A] dark:text-white">
-              Source Verification & Review Queue Distribution
+            <h2 className="font-display text-sm font-bold text-[#0F172A]">
+              Source Verification &amp; Review Queue Distribution
             </h2>
-            <p className="text-xs text-[#617384] dark:text-slate-300">
+            <p className="text-xs text-[#64748B]">
               Breakdown of verification states across submitted institutional certificates
             </p>
           </div>
           <div className="h-52 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data.processingOverview.verificationStatusDistribution} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" stroke="#DCE5EC" />
-                <XAxis type="number" tick={{ fontSize: 11 }} />
-                <YAxis dataKey="status" type="category" width={170} tick={{ fontSize: 11 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
+                <XAxis type="number" tick={{ fontSize: 11, fill: '#475569' }} />
+                <YAxis dataKey="status" type="category" width={170} tick={{ fontSize: 11, fill: '#475569' }} />
                 <Tooltip />
-                <Bar dataKey="count" name="Documents" fill="#27A6A1" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="count" name="Documents" fill="#0D9488" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -250,13 +302,13 @@ export const DashboardPage: React.FC = () => {
       </div>
 
       {/* Priority Work Queue Table */}
-      <div className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 space-y-4">
+      <div className="bg-white border border-[#DCE5EC] rounded-xl p-5 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h2 className="font-display text-base font-bold text-[#10243A] dark:text-white">
+            <h2 className="font-display text-base font-bold text-[#10243A]">
               Priority Work Queue
             </h2>
-            <p className="text-xs text-[#617384] dark:text-slate-300">
+            <p className="text-xs text-[#617384]">
               What needs attention, unresolved findings count, current owner, and recommended next action
             </p>
           </div>
@@ -270,7 +322,7 @@ export const DashboardPage: React.FC = () => {
                 onChange={(e) => setQueueSearch(e.target.value)}
                 placeholder="Filter queue..."
                 aria-label="Filter priority work queue"
-                className="pl-8 pr-3 py-1.5 text-xs border border-[#DCE5EC] dark:border-[#213D5B] rounded bg-[#F4F7FA] dark:bg-[#0B1828]"
+                className="pl-8 pr-3 py-1.5 text-xs border border-[#DCE5EC] rounded bg-[#F4F7FA]"
               />
             </div>
 
@@ -278,7 +330,7 @@ export const DashboardPage: React.FC = () => {
               aria-label="Filter by validation status"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-2.5 py-1.5 text-xs border border-[#DCE5EC] dark:border-[#213D5B] rounded bg-[#F4F7FA] dark:bg-[#0B1828]"
+              className="px-2.5 py-1.5 text-xs border border-[#DCE5EC] rounded bg-[#F4F7FA]"
             >
               <option value="ALL">All Statuses</option>
               <option value="Awaiting Manual Review">Awaiting Manual Review</option>
@@ -290,7 +342,7 @@ export const DashboardPage: React.FC = () => {
             <button
               type="button"
               onClick={() => exportApplicationsCsv(filteredQueue)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#DCE5EC] dark:border-[#213D5B] rounded hover:bg-[#F4F7FA] dark:hover:bg-[#16304B]"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#DCE5EC] rounded hover:bg-[#F4F7FA]"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Export CSV</span>
@@ -301,7 +353,7 @@ export const DashboardPage: React.FC = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="border-b border-[#DCE5EC] dark:border-[#213D5B] text-[#617384] dark:text-slate-300">
+              <tr className="border-b border-[#DCE5EC] text-[#617384]">
                 <th className="py-2.5 pr-3">
                   <input
                     type="checkbox"
@@ -323,9 +375,9 @@ export const DashboardPage: React.FC = () => {
                 <th className="py-2.5 pl-3 font-semibold text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DCE5EC] dark:divide-[#213D5B]">
+            <tbody className="divide-y divide-[#DCE5EC]">
               {filteredQueue.map((app) => (
-                <tr key={app.id} className="hover:bg-[#F4F7FA]/70 dark:hover:bg-[#16304B]/40">
+                <tr key={app.id} className="hover:bg-[#F4F7FA]/70">
                   <td className="py-3 pr-3">
                     <input
                       type="checkbox"
@@ -343,11 +395,11 @@ export const DashboardPage: React.FC = () => {
                       {app.applicationCode}
                     </Link>
                   </td>
-                  <td className="py-3 px-3 font-medium text-[#172B3A] dark:text-white">
+                  <td className="py-3 px-3 font-medium text-[#172B3A]">
                     {app.institutionName}
                     <div className="text-[11px] text-[#617384] font-mono">{app.institutionId}</div>
                   </td>
-                  <td className="py-3 px-3 text-[#617384] dark:text-slate-300">{app.category}</td>
+                  <td className="py-3 px-3 text-[#617384]">{app.category}</td>
                   <td className="py-3 px-3 font-mono tabular-nums text-[#617384]">{app.submissionDate}</td>
                   <td className="py-3 px-3">
                     <StatusIndicator status={app.status} />
@@ -355,10 +407,10 @@ export const DashboardPage: React.FC = () => {
                   <td className="py-3 px-3 text-right font-mono tabular-nums font-semibold">
                     {app.unresolvedFindingsCount}
                   </td>
-                  <td className="py-3 px-3 text-[#172B3A] dark:text-slate-200">
+                  <td className="py-3 px-3 text-[#172B3A]">
                     {app.assignedReviewerName || 'Unassigned'}
                   </td>
-                  <td className="py-3 px-3 text-[#617384] dark:text-slate-300 max-w-xs truncate">
+                  <td className="py-3 px-3 text-[#617384] max-w-xs truncate">
                     {app.nextAction}
                   </td>
                   <td className="py-3 pl-3 text-right">
@@ -379,21 +431,21 @@ export const DashboardPage: React.FC = () => {
 
       {/* Bottom Split: Operational Alerts + Recent Audit Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-6 bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 space-y-3">
-          <h2 className="font-display text-sm font-bold text-[#10243A] dark:text-white">
+        <div className="lg:col-span-6 bg-white border border-[#DCE5EC] rounded-xl p-5 space-y-3">
+          <h2 className="font-display text-sm font-bold text-[#10243A]">
             Operational Alerts & Exceptions
           </h2>
-          <div className="divide-y divide-[#DCE5EC] dark:divide-[#213D5B]">
+          <div className="divide-y divide-[#DCE5EC]">
             {data.operationalAlerts.map((alt) => (
               <div key={alt.id} className="py-3 flex items-start justify-between gap-4">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <StatusIndicator status={alt.severity} />
-                    <span className="text-xs font-semibold text-[#172B3A] dark:text-white">
+                    <span className="text-xs font-semibold text-[#172B3A]">
                       {alt.title}
                     </span>
                   </div>
-                  <p className="text-xs text-[#617384] dark:text-slate-300">{alt.detail}</p>
+                  <p className="text-xs text-[#617384]">{alt.detail}</p>
                 </div>
                 <Link
                   to={alt.link}
@@ -406,23 +458,23 @@ export const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="lg:col-span-6 bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 space-y-3">
+        <div className="lg:col-span-6 bg-white border border-[#DCE5EC] rounded-xl p-5 space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="font-display text-sm font-bold text-[#10243A] dark:text-white">
+            <h2 className="font-display text-sm font-bold text-[#10243A]">
               Recent Traceable Activity
             </h2>
             <Link to="/audit" className="text-xs font-medium text-[#087F8C] hover:underline">
               Full Audit Trail →
             </Link>
           </div>
-          <div className="divide-y divide-[#DCE5EC] dark:divide-[#213D5B]">
+          <div className="divide-y divide-[#DCE5EC]">
             {data.recentActivity.map((ev) => (
               <div key={ev.id} className="py-2.5 flex items-start justify-between gap-4 text-xs">
                 <div className="space-y-0.5">
-                  <div className="font-medium text-[#172B3A] dark:text-white">
+                  <div className="font-medium text-[#172B3A]">
                     <span className="font-mono text-[#087F8C]">{ev.action}</span> · {ev.actorName}
                   </div>
-                  <div className="text-[#617384] dark:text-slate-300">{ev.reason}</div>
+                  <div className="text-[#617384]">{ev.reason}</div>
                 </div>
                 <div className="text-right shrink-0">
                   <div className="font-mono text-[11px] text-[#617384]">
@@ -525,18 +577,18 @@ export const WorkQueuePage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-white border border-[#DCE5EC] rounded-xl p-5 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-xl font-bold text-[#10243A] dark:text-white">
+          <h1 className="font-display text-xl font-bold text-[#10243A]">
             My Work Queue & Case Assignments
           </h1>
-          <p className="text-xs text-[#617384] dark:text-slate-300">
+          <p className="text-xs text-[#617384]">
             Organize assigned scrutiny workload, escalate priority cases, and manage officer assignments. Automated validation outcomes never equate to a final regulatory decision.
           </p>
         </div>
 
         {/* Segmented Queue Mode Control */}
-        <div className="flex items-center gap-1 p-1 bg-[#F4F7FA] dark:bg-[#0B1828] rounded-lg border border-[#DCE5EC] dark:border-[#213D5B]">
+        <div className="flex items-center gap-1 p-1 bg-[#F4F7FA] rounded-lg border border-[#DCE5EC]">
           {[
             { id: 'all', label: `All Permitted (${applications.length})` },
             {
@@ -554,8 +606,8 @@ export const WorkQueuePage: React.FC = () => {
               onClick={() => setTab(t.id as any)}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap ${
                 tab === t.id
-                  ? 'bg-white dark:bg-[#10243A] text-[#10243A] dark:text-white shadow-sm'
-                  : 'text-[#617384] dark:text-slate-300'
+                  ? 'bg-white text-[#10243A] shadow-sm'
+                  : 'text-[#617384]'
               }`}
             >
               {t.label}
@@ -565,20 +617,20 @@ export const WorkQueuePage: React.FC = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-4 flex flex-wrap items-center gap-3">
+      <div className="bg-white border border-[#DCE5EC] rounded-xl p-4 flex flex-wrap items-center gap-3">
         <input
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search Application ID or Institution..."
           aria-label="Search work queue"
-          className="px-3 py-1.5 text-xs border border-[#DCE5EC] dark:border-[#213D5B] rounded bg-[#F4F7FA] dark:bg-[#0B1828] w-64"
+          className="px-3 py-1.5 text-xs border border-[#DCE5EC] rounded bg-[#F4F7FA] w-64"
         />
         <select
           aria-label="Filter by priority"
           value={priorityFilter}
           onChange={(e) => setPriorityFilter(e.target.value)}
-          className="px-3 py-1.5 text-xs border border-[#DCE5EC] dark:border-[#213D5B] rounded bg-[#F4F7FA] dark:bg-[#0B1828]"
+          className="px-3 py-1.5 text-xs border border-[#DCE5EC] rounded bg-[#F4F7FA]"
         >
           <option value="ALL">All Priorities</option>
           <option value="High">High Priority</option>
@@ -589,7 +641,7 @@ export const WorkQueuePage: React.FC = () => {
           aria-label="Filter by workflow status"
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3 py-1.5 text-xs border border-[#DCE5EC] dark:border-[#213D5B] rounded bg-[#F4F7FA] dark:bg-[#0B1828]"
+          className="px-3 py-1.5 text-xs border border-[#DCE5EC] rounded bg-[#F4F7FA]"
         >
           <option value="ALL">All Workflow Statuses</option>
           <option value="New">New</option>
@@ -604,10 +656,10 @@ export const WorkQueuePage: React.FC = () => {
       </div>
 
       {/* Queue Table */}
-      <div className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 overflow-x-auto">
+      <div className="bg-white border border-[#DCE5EC] rounded-xl p-5 overflow-x-auto">
         <table className="w-full text-left border-collapse text-xs">
           <thead>
-            <tr className="border-b border-[#DCE5EC] dark:border-[#213D5B] text-[#617384]">
+            <tr className="border-b border-[#DCE5EC] text-[#617384]">
               <th className="py-2.5 pr-3 font-semibold">Application ID</th>
               <th className="py-2.5 px-3 font-semibold">Institution</th>
               <th className="py-2.5 px-3 font-semibold">Priority & Due Date</th>
@@ -617,9 +669,9 @@ export const WorkQueuePage: React.FC = () => {
               <th className="py-2.5 pl-3 font-semibold text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#DCE5EC] dark:divide-[#213D5B]">
+          <tbody className="divide-y divide-[#DCE5EC]">
             {filtered.map((app) => (
-              <tr key={app.id} className="hover:bg-[#F4F7FA]/70 dark:hover:bg-[#16304B]/40">
+              <tr key={app.id} className="hover:bg-[#F4F7FA]/70">
                 <td className="py-3 pr-3 font-mono font-semibold text-[#087F8C]">
                   <Link to={`/applications/${app.id}`} className="hover:underline">
                     {app.applicationCode}
@@ -638,7 +690,7 @@ export const WorkQueuePage: React.FC = () => {
                     aria-label={`Change status for ${app.applicationCode}`}
                     value={app.status}
                     onChange={(e) => handleStatusChange(app.id, e.target.value)}
-                    className="px-2 py-1 text-xs border border-[#DCE5EC] dark:border-[#213D5B] rounded bg-[#F4F7FA] dark:bg-[#0B1828]"
+                    className="px-2 py-1 text-xs border border-[#DCE5EC] rounded bg-[#F4F7FA]"
                   >
                     <option value="New">New</option>
                     <option value="Processing">Processing</option>
@@ -658,7 +710,7 @@ export const WorkQueuePage: React.FC = () => {
                     aria-label={`Assign reviewer for ${app.applicationCode}`}
                     value={app.assignedReviewerId || ''}
                     onChange={(e) => e.target.value && handleAssign(app.id, e.target.value)}
-                    className="px-2 py-1 text-xs border border-[#DCE5EC] dark:border-[#213D5B] rounded bg-[#F4F7FA] dark:bg-[#0B1828]"
+                    className="px-2 py-1 text-xs border border-[#DCE5EC] rounded bg-[#F4F7FA]"
                   >
                     <option value="">Unassigned</option>
                     {users.map((u) => (
@@ -725,12 +777,12 @@ export const ApplicationRegistryPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-white border border-[#DCE5EC] rounded-xl p-5 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-xl font-bold text-[#10243A] dark:text-white">
+          <h1 className="font-display text-xl font-bold text-[#10243A]">
             Institutional Application Registry
           </h1>
-          <p className="text-xs text-[#617384] dark:text-slate-300">
+          <p className="text-xs text-[#617384]">
             Search, filter, and inspect submitted technical institution applications and their verification states.
           </p>
         </div>
@@ -738,7 +790,7 @@ export const ApplicationRegistryPage: React.FC = () => {
           <button
             type="button"
             onClick={() => exportApplicationsCsv(applications)}
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium border border-[#DCE5EC] dark:border-[#213D5B] rounded hover:bg-[#F4F7FA]"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium border border-[#DCE5EC] rounded hover:bg-[#F4F7FA]"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export Permitted Records</span>
@@ -759,7 +811,7 @@ export const ApplicationRegistryPage: React.FC = () => {
           e.preventDefault();
           fetchApplications();
         }}
-        className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-4 grid grid-cols-1 md:grid-cols-12 gap-3 items-end"
+        className="bg-white border border-[#DCE5EC] rounded-xl p-4 grid grid-cols-1 md:grid-cols-12 gap-3 items-end"
       >
         <div className="md:col-span-4">
           <label htmlFor="reg-search" className="block text-xs font-medium mb-1">
@@ -771,7 +823,7 @@ export const ApplicationRegistryPage: React.FC = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="e.g., APP-DEMO-2026-001, Meridian..."
-            className="w-full px-3 py-1.5 text-xs border border-[#DCE5EC] dark:border-[#213D5B] rounded bg-[#F4F7FA] dark:bg-[#0B1828]"
+            className="w-full px-3 py-1.5 text-xs border border-[#DCE5EC] rounded bg-[#F4F7FA]"
           />
         </div>
         <div className="md:col-span-3">
@@ -782,7 +834,7 @@ export const ApplicationRegistryPage: React.FC = () => {
             id="reg-cat"
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="w-full px-3 py-1.5 text-xs border border-[#DCE5EC] dark:border-[#213D5B] rounded bg-[#F4F7FA] dark:bg-[#0B1828]"
+            className="w-full px-3 py-1.5 text-xs border border-[#DCE5EC] rounded bg-[#F4F7FA]"
           >
             <option value="ALL">All Categories</option>
             <option value="Demonstration EoA Application">Demonstration EoA Application</option>
@@ -798,7 +850,7 @@ export const ApplicationRegistryPage: React.FC = () => {
             id="reg-status"
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="w-full px-3 py-1.5 text-xs border border-[#DCE5EC] dark:border-[#213D5B] rounded bg-[#F4F7FA] dark:bg-[#0B1828]"
+            className="w-full px-3 py-1.5 text-xs border border-[#DCE5EC] rounded bg-[#F4F7FA]"
           >
             <option value="ALL">All Statuses</option>
             <option value="New">New</option>
@@ -819,7 +871,7 @@ export const ApplicationRegistryPage: React.FC = () => {
       </form>
 
       {/* Registry Table */}
-      <div className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 overflow-x-auto">
+      <div className="bg-white border border-[#DCE5EC] rounded-xl p-5 overflow-x-auto">
         {loading ? (
           <div className="py-8 text-center text-xs text-[#617384]">Loading application registry...</div>
         ) : applications.length === 0 ? (
@@ -832,7 +884,7 @@ export const ApplicationRegistryPage: React.FC = () => {
         ) : (
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="border-b border-[#DCE5EC] dark:border-[#213D5B] text-[#617384]">
+              <tr className="border-b border-[#DCE5EC] text-[#617384]">
                 <th className="py-2.5 pr-3 font-semibold">Application ID</th>
                 <th className="py-2.5 px-3 font-semibold">Institution Name</th>
                 <th className="py-2.5 px-3 font-semibold">Application Type</th>
@@ -845,9 +897,9 @@ export const ApplicationRegistryPage: React.FC = () => {
                 <th className="py-2.5 pl-3 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DCE5EC] dark:divide-[#213D5B]">
+            <tbody className="divide-y divide-[#DCE5EC]">
               {applications.map((app) => (
-                <tr key={app.id} className="hover:bg-[#F4F7FA]/70 dark:hover:bg-[#16304B]/40">
+                <tr key={app.id} className="hover:bg-[#F4F7FA]/70">
                   <td className="py-3 pr-3 font-mono font-semibold text-[#087F8C]">
                     <Link to={`/applications/${app.id}`} className="hover:underline">
                       {app.applicationCode}
@@ -859,7 +911,7 @@ export const ApplicationRegistryPage: React.FC = () => {
                       {app.institutionId} · {app.state}
                     </div>
                   </td>
-                  <td className="py-3 px-3 text-[#617384] dark:text-slate-300">{app.category}</td>
+                  <td className="py-3 px-3 text-[#617384]">{app.category}</td>
                   <td className="py-3 px-3 font-mono">{app.academicYear}</td>
                   <td className="py-3 px-3 font-mono tabular-nums">{app.submissionDate}</td>
                   <td className="py-3 px-3 text-right font-mono tabular-nums">
@@ -1078,13 +1130,13 @@ export const ApplicationIntakePage: React.FC = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <div className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-5 space-y-4">
+      <div className="bg-white border border-[#DCE5EC] rounded-xl p-5 space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="font-display text-xl font-bold text-[#10243A] dark:text-white">
+            <h1 className="font-display text-xl font-bold text-[#10243A]">
               Guided Regulatory Application Intake
             </h1>
-            <p className="text-xs text-[#617384] dark:text-slate-300">
+            <p className="text-xs text-[#617384]">
               Configurable category-specific checklist workflow with auditable submission
             </p>
           </div>
@@ -1108,8 +1160,8 @@ export const ApplicationIntakePage: React.FC = () => {
                 step === s.num
                   ? 'bg-[#10243A] text-white border-[#10243A]'
                   : step > s.num
-                  ? 'bg-[#F4F7FA] dark:bg-[#16304B] text-[#087F8C] border-[#087F8C]/40'
-                  : 'bg-[#F4F7FA] dark:bg-[#0B1828] text-[#617384] border-[#DCE5EC] dark:border-[#213D5B]'
+                  ? 'bg-[#F4F7FA] text-[#087F8C] border-[#087F8C]/40'
+                  : 'bg-[#F4F7FA] text-[#617384] border-[#DCE5EC]'
               }`}
             >
               {s.label}
@@ -1119,10 +1171,10 @@ export const ApplicationIntakePage: React.FC = () => {
       </div>
 
       {/* Step Content */}
-      <div className="bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] rounded-xl p-6 space-y-6">
+      <div className="bg-white border border-[#DCE5EC] rounded-xl p-6 space-y-6">
         {step === 1 && (
           <div className="space-y-4">
-            <h2 className="font-display text-base font-bold text-[#10243A] dark:text-white">
+            <h2 className="font-display text-base font-bold text-[#10243A]">
               Step 1: Institution Identity & Contact Details
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
@@ -1135,7 +1187,7 @@ export const ApplicationIntakePage: React.FC = () => {
                   type="text"
                   value={institutionId}
                   onChange={(e) => setInstitutionId(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#DCE5EC] dark:border-[#213D5B] rounded font-mono"
+                  className="w-full px-3 py-2 border border-[#DCE5EC] rounded font-mono"
                 />
               </div>
               <div>
@@ -1147,7 +1199,7 @@ export const ApplicationIntakePage: React.FC = () => {
                   type="text"
                   value={institutionName}
                   onChange={(e) => setInstitutionName(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#DCE5EC] dark:border-[#213D5B] rounded"
+                  className="w-full px-3 py-2 border border-[#DCE5EC] rounded"
                 />
               </div>
               <div>
@@ -1159,7 +1211,7 @@ export const ApplicationIntakePage: React.FC = () => {
                   type="text"
                   value={institutionType}
                   onChange={(e) => setInstitutionType(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#DCE5EC] dark:border-[#213D5B] rounded"
+                  className="w-full px-3 py-2 border border-[#DCE5EC] rounded"
                 />
               </div>
               <div>
@@ -1170,7 +1222,7 @@ export const ApplicationIntakePage: React.FC = () => {
                   id="in-cat"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#DCE5EC] dark:border-[#213D5B] rounded"
+                  className="w-full px-3 py-2 border border-[#DCE5EC] rounded"
                 >
                   <option value="Demonstration EoA Application">Demonstration EoA Application</option>
                   <option value="Intake Expansion & New Programme">Intake Expansion & New Programme</option>
@@ -1186,7 +1238,7 @@ export const ApplicationIntakePage: React.FC = () => {
                   type="text"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#DCE5EC] dark:border-[#213D5B] rounded"
+                  className="w-full px-3 py-2 border border-[#DCE5EC] rounded"
                 />
               </div>
               <div>
@@ -1198,7 +1250,7 @@ export const ApplicationIntakePage: React.FC = () => {
                   type="text"
                   value={district}
                   onChange={(e) => setDistrict(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#DCE5EC] dark:border-[#213D5B] rounded"
+                  className="w-full px-3 py-2 border border-[#DCE5EC] rounded"
                 />
               </div>
               <div>
@@ -1210,7 +1262,7 @@ export const ApplicationIntakePage: React.FC = () => {
                   type="text"
                   value={academicYear}
                   onChange={(e) => setAcademicYear(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#DCE5EC] dark:border-[#213D5B] rounded font-mono"
+                  className="w-full px-3 py-2 border border-[#DCE5EC] rounded font-mono"
                 />
               </div>
               <div>
@@ -1222,7 +1274,7 @@ export const ApplicationIntakePage: React.FC = () => {
                   type="text"
                   value={`${contactName} (${contactEmail})`}
                   onChange={(e) => setContactName(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#DCE5EC] dark:border-[#213D5B] rounded"
+                  className="w-full px-3 py-2 border border-[#DCE5EC] rounded"
                 />
               </div>
             </div>
@@ -1231,7 +1283,7 @@ export const ApplicationIntakePage: React.FC = () => {
 
         {step === 2 && (
           <div className="space-y-4">
-            <h2 className="font-display text-base font-bold text-[#10243A] dark:text-white">
+            <h2 className="font-display text-base font-bold text-[#10243A]">
               Step 2: Category-Specific Quantitative Claims ({category})
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
@@ -1301,7 +1353,7 @@ export const ApplicationIntakePage: React.FC = () => {
 
         {step === 3 && (
           <div className="space-y-4">
-            <h2 className="font-display text-base font-bold text-[#10243A] dark:text-white">
+            <h2 className="font-display text-base font-bold text-[#10243A]">
               Step 3: Supporting Documents & Configurable Category Checklist
             </h2>
             <p className="text-xs text-[#617384]">
@@ -1316,7 +1368,7 @@ export const ApplicationIntakePage: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Checklist Status */}
-              <div className="bg-[#F4F7FA] dark:bg-[#0B1828] border border-[#DCE5EC] dark:border-[#213D5B] rounded-lg p-4 space-y-2.5">
+              <div className="bg-[#F4F7FA] border border-[#DCE5EC] rounded-lg p-4 space-y-2.5">
                 <div className="text-xs font-semibold">
                   Configured Checklist for &ldquo;{category}&rdquo;
                 </div>
@@ -1340,7 +1392,7 @@ export const ApplicationIntakePage: React.FC = () => {
               </div>
 
               {/* File Picker */}
-              <div className="border-2 border-dashed border-[#DCE5EC] dark:border-[#213D5B] rounded-lg p-6 flex flex-col items-center justify-center text-center space-y-3">
+              <div className="border-2 border-dashed border-[#DCE5EC] rounded-lg p-6 flex flex-col items-center justify-center text-center space-y-3">
                 <Upload className="w-6 h-6 text-[#087F8C]" />
                 <div className="text-xs font-medium">
                   Select PDF, PNG, JPG, or JPEG files to attach
@@ -1390,10 +1442,10 @@ export const ApplicationIntakePage: React.FC = () => {
 
         {(step === 4 || step === 5) && (
           <div className="space-y-4 text-xs">
-            <h2 className="font-display text-base font-bold text-[#10243A] dark:text-white">
+            <h2 className="font-display text-base font-bold text-[#10243A]">
               {step === 4 ? 'Step 4: Review Entered Details & Evidence Package' : 'Step 5: Confirm & Persist Auditable Submission'}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#F4F7FA] dark:bg-[#0B1828] border border-[#DCE5EC] dark:border-[#213D5B] rounded-lg p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#F4F7FA] border border-[#DCE5EC] rounded-lg p-4">
               <div>
                 <div className="text-[#617384]">Institution</div>
                 <div className="font-semibold">
@@ -1427,12 +1479,12 @@ export const ApplicationIntakePage: React.FC = () => {
             </div>
 
             {step === 5 && (
-              <div className="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 space-y-2">
-                <div className="font-semibold text-[#18794E] dark:text-emerald-300 flex items-center gap-1.5">
+              <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-200 space-y-2">
+                <div className="font-semibold text-[#18794E] flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Ready for Auditable Submission</span>
                 </div>
-                <p className="text-[#617384] dark:text-slate-300">
+                <p className="text-[#617384]">
                   Submitting this application persists the record in the database, mirrors metadata to Firestore, and records a tamper-evident SHA-256 audit trail event.
                 </p>
               </div>
@@ -1441,7 +1493,7 @@ export const ApplicationIntakePage: React.FC = () => {
         )}
 
         {/* Wizard Footer Navigation */}
-        <div className="pt-4 border-t border-[#DCE5EC] dark:border-[#213D5B] flex items-center justify-between">
+        <div className="pt-4 border-t border-[#DCE5EC] flex items-center justify-between">
           <button
             type="button"
             disabled={step === 1}

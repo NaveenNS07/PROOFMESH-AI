@@ -142,36 +142,36 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   };
 
   return (
-    <div className="min-h-screen flex bg-[#F4F7FA] dark:bg-[#0B1828] text-[#172B3A] dark:text-[#F0F5FA]">
-      {/* Fixed / Collapsible Left Sidebar */}
+    <div className="min-h-screen flex bg-[#F8FAFC] text-[#0F172A]">
+      {/* Fixed / Collapsible Left Sidebar — Crisp Executive Light Theme */}
       <aside
         aria-label="Primary Regulatory Navigation"
         className={`${
           collapsed ? 'w-16' : 'w-64'
-        } shrink-0 bg-[#10243A] text-slate-200 border-r border-[#183B56] flex flex-col justify-between transition-all duration-150`}
+        } shrink-0 bg-white text-[#1E293B] border-r border-[#E2E8F0] shadow-[2px_0_12px_rgba(15,23,42,0.03)] flex flex-col justify-between transition-all duration-200 z-20`}
       >
         <div>
           {/* Brand Header */}
-          <div className="h-14 px-4 flex items-center justify-between border-b border-[#183B56]">
+          <div className="h-15 px-4 flex items-center justify-between border-b border-[#E2E8F0] bg-white">
             <Link to="/" className="flex items-center gap-2 focus:outline-none">
-              <ProofMeshLogo compact={collapsed} lightText />
+              <ProofMeshLogo compact={collapsed} />
             </Link>
             <button
               type="button"
               onClick={() => setCollapsed((c) => !c)}
               aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-              className="p-1.5 rounded text-slate-300 hover:text-white hover:bg-[#183B56] transition-colors"
+              className="p-1.5 rounded-lg text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-colors cursor-pointer"
             >
               {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
             </button>
           </div>
 
           {/* Quick Action: New Application Intake */}
-          <div className="p-3 border-b border-[#183B56]">
+          <div className="p-3 border-b border-[#E2E8F0] bg-gradient-to-b from-[#F8FAFC] to-white">
             <Link
               to="/applications/new"
               title="New Application Intake"
-              className="flex items-center justify-center gap-2 w-full py-2 px-3 rounded bg-[#087F8C] hover:bg-[#27A6A1] text-white text-xs font-medium transition-colors whitespace-nowrap"
+              className="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#1E3A8A] via-[#0F4C81] to-[#0D9488] hover:from-[#1E40AF] hover:to-[#0F766E] text-white text-xs font-semibold shadow-sm hover:shadow transition-all duration-200 whitespace-nowrap"
             >
               <FileText className="w-4 h-4 shrink-0" />
               {!collapsed && <span>New Application Intake</span>}
@@ -179,11 +179,11 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           </div>
 
           {/* Navigation Groups */}
-          <nav className="py-2 px-2 space-y-4 overflow-y-auto max-h-[calc(100vh-11rem)]">
+          <nav className="py-3 px-2.5 space-y-4 overflow-y-auto max-h-[calc(100vh-11.5rem)]">
             {SIDEBAR_GROUPS.map((group) => (
               <div key={group.groupTitle}>
                 {!collapsed && (
-                  <div className="px-2.5 pb-1 text-[11px] font-semibold tracking-wider text-slate-400">
+                  <div className="px-2.5 pb-1.5 text-[10px] font-bold uppercase tracking-widest text-[#64748B]">
                     {group.groupTitle}
                   </div>
                 )}
@@ -198,18 +198,22 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                         key={item.path}
                         to={item.path}
                         title={item.label}
-                        className={`flex items-center justify-between gap-2.5 px-2.5 py-2 rounded text-xs font-medium transition-colors ${
+                        className={`flex items-center justify-between gap-2.5 px-2.5 py-2 rounded-lg text-xs transition-all duration-150 ${
                           isActive
-                            ? 'bg-[#183B56] text-white'
-                            : 'text-slate-300 hover:bg-[#183B56]/60 hover:text-white'
+                            ? 'bg-gradient-to-r from-[#EFF6FF] to-[#F0FDFA] text-[#0F4C81] font-semibold border border-[#BFDBFE] shadow-2xs'
+                            : 'text-[#475569] font-medium hover:bg-[#F1F5F9] hover:text-[#0F172A] hover:translate-x-0.5'
                         }`}
                       >
                         <span className="flex items-center gap-2.5 truncate">
-                          <Icon className="w-4 h-4 shrink-0 text-[#27A6A1]" />
+                          <Icon
+                            className={`w-4 h-4 shrink-0 ${
+                              isActive ? 'text-[#0D9488]' : 'text-[#64748B]'
+                            }`}
+                          />
                           {!collapsed && <span className="truncate">{item.label}</span>}
                         </span>
                         {!collapsed && item.path === '/notifications' && unreadNotificationsCount > 0 && (
-                          <span className="font-mono text-[11px] text-[#27A6A1] tabular-nums">
+                          <span className="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded-full bg-[#DBEAFE] text-[#1D4ED8] tabular-nums">
                             {unreadNotificationsCount}
                           </span>
                         )}
@@ -221,39 +225,39 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             ))}
 
             {/* Public Verification Portal Link */}
-            <div className="pt-2 border-t border-[#183B56]">
+            <div className="pt-2 border-t border-[#E2E8F0]">
               <Link
                 to="/public/verify"
                 title="Public Verification Portal"
-                className="flex items-center gap-2.5 px-2.5 py-2 rounded text-xs font-medium text-slate-300 hover:bg-[#183B56]/60 hover:text-white transition-colors"
+                className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0F172A] transition-colors"
               >
-                <Globe className="w-4 h-4 shrink-0 text-[#27A6A1]" />
+                <Globe className="w-4 h-4 shrink-0 text-[#0D9488]" />
                 {!collapsed && <span className="truncate">Public Verification Portal</span>}
               </Link>
             </div>
           </nav>
         </div>
 
-        {/* Bottom Profile & Logout */}
-        <div className="p-3 border-t border-[#183B56] bg-[#0D1E31]">
+        {/* Bottom Profile & Settings */}
+        <div className="p-3 border-t border-[#E2E8F0] bg-[#F8FAFC]">
           {!collapsed ? (
-            <div className="space-y-2">
+            <div className="space-y-1">
               <div className="flex items-center justify-between">
                 <Link
                   to="/settings/profile"
-                  className="text-xs font-semibold text-white hover:underline truncate"
+                  className="text-xs font-bold text-[#0F172A] hover:text-[#0D9488] truncate"
                 >
                   {currentUser.fullName}
                 </Link>
                 <Link
                   to="/settings/profile"
                   aria-label="Profile settings"
-                  className="p-1 text-slate-400 hover:text-white"
+                  className="p-1 text-[#64748B] hover:text-[#0F172A] rounded hover:bg-[#E2E8F0]/50"
                 >
                   <Settings className="w-3.5 h-3.5" />
                 </Link>
               </div>
-              <div className="text-[11px] text-slate-400 truncate">
+              <div className="text-[11px] text-[#0D9488] font-semibold truncate">
                 {currentUser.role.replace(/_/g, ' ')}
                 {currentUser.institutionId ? ` · ${currentUser.institutionId}` : ''}
               </div>
@@ -262,7 +266,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             <Link
               to="/settings/profile"
               aria-label="Profile settings"
-              className="flex justify-center p-1.5 text-slate-300 hover:text-white"
+              className="flex justify-center p-1.5 text-[#64748B] hover:text-[#0F172A]"
             >
               <Settings className="w-4 h-4" />
             </Link>
@@ -272,44 +276,47 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Mandatory Synthetic Data Disclosure Banner */}
-        <div className="bg-[#183B56] text-slate-100 px-6 py-1.5 text-xs flex flex-wrap items-center justify-between gap-2 border-b border-[#10243A]">
-          <span className="font-mono tracking-tight">
+        {/* Mandatory Synthetic Data Disclosure Banner — Crisp Institutional Light Ribbon */}
+        <div className="bg-gradient-to-r from-[#EFF6FF] via-[#F0F9FF] to-[#F0FDFA] text-[#0F172A] px-6 py-1.5 text-xs flex flex-wrap items-center justify-between gap-2 border-b border-[#BFDBFE]">
+          <span className="inline-flex items-center gap-2 font-mono font-semibold tracking-tight text-[#1E40AF]">
+            <span className="w-2 h-2 rounded-full bg-[#0D9488] animate-pulse shrink-0" />
             SYNTHETIC DEMONSTRATION DATA — NOT AN OFFICIAL AICTE RECORD · Problem Statement ID: 26261
           </span>
-          <span className="text-slate-300">
+          <span className="text-[#475569] font-medium">
             Human Oversight Retained: Automated outputs are advisory aids for regulatory scrutiny
           </span>
         </div>
 
         {/* Top Workspace Header */}
-        <header className="h-14 bg-white dark:bg-[#10243A] border-b border-[#DCE5EC] dark:border-[#213D5B] px-6 flex items-center justify-between gap-6">
+        <header className="min-h-14 py-2 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] px-6 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-10">
           {/* Left: Breadcrumb Navigation */}
-          <div className="flex items-center gap-2 text-xs text-[#617384] dark:text-slate-300 truncate">
-            <span>{currentMeta.group}</span>
-            <span aria-hidden="true">/</span>
-            <span className="font-semibold text-[#172B3A] dark:text-white truncate">
+          <div className="flex items-center gap-2 text-xs text-[#64748B] min-w-0">
+            <span className="font-semibold text-[#0D9488] uppercase tracking-wider text-[11px] shrink-0">
+              {currentMeta.group}
+            </span>
+            <span aria-hidden="true" className="text-slate-300">/</span>
+            <span className="font-display font-bold text-sm text-[#0F172A] truncate">
               {currentMeta.title}
             </span>
           </div>
 
-          {/* Right: Global Search, Role Switcher, Theme Toggle, Notifications & Profile */}
-          <div className="flex items-center gap-3 shrink-0">
-            <form onSubmit={handleGlobalSearch} className="relative hidden lg:block">
-              <Search className="w-3.5 h-3.5 text-[#617384] absolute left-2.5 top-1/2 -translate-y-1/2" />
+          {/* Right: Global Search, Role Switcher, Notifications & Profile */}
+          <div className="flex items-center gap-2.5 shrink-0">
+            <form onSubmit={handleGlobalSearch} className="relative hidden xl:block">
+              <Search className="w-3.5 h-3.5 text-[#64748B] absolute left-2.5 top-1/2 -translate-y-1/2" />
               <input
                 type="search"
                 value={globalSearch}
                 onChange={(e) => setGlobalSearch(e.target.value)}
                 placeholder="Search Application ID, Institution..."
                 aria-label="Global application search"
-                className="pl-8 pr-3 py-1.5 text-xs bg-[#F4F7FA] dark:bg-[#0B1828] border border-[#DCE5EC] dark:border-[#213D5B] rounded text-[#172B3A] dark:text-white w-60 focus:outline-none focus:border-[#087F8C]"
+                className="pl-8 pr-3 py-1.5 text-xs bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg text-[#0F172A] w-56 focus:outline-none focus:border-[#0D9488] focus:bg-white transition-colors"
               />
             </form>
 
             {/* Demo Role Account Switcher for Instant RBAC Evaluation */}
-            <div className="flex items-center gap-1.5">
-              <UserCheck className="w-3.5 h-3.5 text-[#087F8C] shrink-0" aria-hidden="true" />
+            <div className="flex items-center gap-1.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg px-2.5 py-1">
+              <UserCheck className="w-3.5 h-3.5 text-[#0D9488] shrink-0" aria-hidden="true" />
               <label htmlFor="demo-role-switcher" className="sr-only">
                 Active Role Account
               </label>
@@ -318,7 +325,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 aria-label="Switch Active Demo Role"
                 value={currentUser.email}
                 onChange={(e) => switchUserByEmailOrRole(e.target.value)}
-                className="text-xs bg-[#F4F7FA] dark:bg-[#0B1828] border border-[#DCE5EC] dark:border-[#213D5B] rounded px-2 py-1.5 text-[#172B3A] dark:text-white font-medium focus:outline-none focus:border-[#087F8C]"
+                className="text-xs bg-transparent text-[#0F172A] font-semibold focus:outline-none cursor-pointer max-w-[240px] truncate"
               >
                 {demoAccounts.map((acc) => (
                   <option key={acc.id} value={acc.email}>
@@ -328,25 +335,15 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               </select>
             </div>
 
-            {/* Theme Toggle (Light / Deep Navy Dark) */}
-            <button
-              type="button"
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
-              className="p-1.5 rounded border border-[#DCE5EC] dark:border-[#213D5B] text-[#172B3A] dark:text-slate-200 hover:bg-[#F4F7FA] dark:hover:bg-[#16304B] transition-colors"
-            >
-              {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-            </button>
-
             {/* Notifications Link */}
             <Link
               to="/notifications"
               aria-label={`Notifications (${unreadNotificationsCount} unread)`}
-              className="relative inline-flex items-center gap-1 px-2.5 py-1.5 rounded border border-[#DCE5EC] dark:border-[#213D5B] text-[#172B3A] dark:text-slate-200 hover:bg-[#F4F7FA] dark:hover:bg-[#16304B] transition-colors whitespace-nowrap"
+              className="relative inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-[#0F172A] hover:bg-[#F8FAFC] hover:border-[#94A3B8] transition-all whitespace-nowrap"
             >
-              <Bell className="w-4 h-4 shrink-0" />
+              <Bell className="w-4 h-4 shrink-0 text-[#475569]" />
               {unreadNotificationsCount > 0 && (
-                <span className="font-mono text-[11px] font-semibold text-[#B42318] dark:text-red-400 tabular-nums">
+                <span className="font-mono text-[11px] font-bold px-1.5 py-0.2 rounded-full bg-rose-50 text-rose-700 border border-rose-200 tabular-nums">
                   {unreadNotificationsCount}
                 </span>
               )}
@@ -360,7 +357,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 navigate('/login');
               }}
               aria-label="Sign out"
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded border border-[#DCE5EC] dark:border-[#213D5B] text-xs font-medium text-[#617384] dark:text-slate-300 hover:text-[#B42318] transition-colors whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-semibold text-[#475569] hover:text-rose-700 hover:bg-rose-50 hover:border-rose-200 transition-all whitespace-nowrap cursor-pointer"
             >
               <LogOut className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Sign Out</span>
@@ -368,8 +365,10 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           </div>
         </header>
 
-        {/* Page Content */}
-        <main className="flex-1 p-6 overflow-x-hidden">{children}</main>
+        {/* Page Content with Smooth Entrance Animation */}
+        <main key={location.pathname} className="flex-1 p-6 overflow-x-hidden pm-page-enter">
+          {children}
+        </main>
       </div>
 
       {/* Toast Notifications Container */}
@@ -381,19 +380,19 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           {toasts.map((t) => (
             <div
               key={t.id}
-              className="pointer-events-auto bg-white dark:bg-[#10243A] border border-[#DCE5EC] dark:border-[#213D5B] shadow-md rounded-lg p-3.5 flex items-start justify-between gap-3"
+              className="pointer-events-auto bg-white border border-[#CBD5E1] shadow-lg rounded-xl p-3.5 flex items-start justify-between gap-3 pm-page-enter"
             >
               <div className="space-y-0.5">
-                <div className="text-xs font-semibold text-[#172B3A] dark:text-white">{t.title}</div>
+                <div className="text-xs font-bold text-[#0F172A]">{t.title}</div>
                 {t.description && (
-                  <div className="text-xs text-[#617384] dark:text-slate-300">{t.description}</div>
+                  <div className="text-xs text-[#475569]">{t.description}</div>
                 )}
               </div>
               <button
                 type="button"
                 onClick={() => dismissToast(t.id)}
                 aria-label="Close notification"
-                className="text-slate-400 hover:text-slate-600"
+                className="text-slate-400 hover:text-slate-600 cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
               </button>

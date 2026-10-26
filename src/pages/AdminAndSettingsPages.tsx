@@ -345,19 +345,9 @@ export const ProfileSettingsPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setTheme('light')}
-              className={`px-3 py-1.5 rounded text-xs font-semibold cursor-pointer ${
-                theme === 'light' ? 'bg-[#10243A] text-white' : 'border border-[#DCE5EC]'
-              }`}
+              className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-[#F0FDFA] text-[#087F8C] border border-[#99F6E4] cursor-pointer"
             >
-              Regulatory Light Theme (Default)
-            </button>
-            <button
-              onClick={() => setTheme('dark')}
-              className={`px-3 py-1.5 rounded text-xs font-semibold cursor-pointer ${
-                theme === 'dark' ? 'bg-[#087F8C] text-white' : 'border border-[#DCE5EC]'
-              }`}
-            >
-              Deep Navy Dark Theme
+              Institutional Light Theme (Standardized)
             </button>
           </div>
         </div>

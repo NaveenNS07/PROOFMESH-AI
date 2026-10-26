@@ -1129,7 +1129,8 @@ function registerApiRoutes() {
     const prev = item.resolutionStatus;
     item.resolutionStatus = resolutionStatus || 'Reviewed & Acknowledged';
     item.resolvedBy = user.fullName;
-    item.resolutionNote = resolutionNote || 'Reviewed against applicable rules and historical records.';
+    const noteText: string = resolutionNote || 'Reviewed against applicable rules and historical records.';
+    item.resolutionNote = noteText;
 
     appendAuditEvent({
       actorId: user.id,
@@ -1140,7 +1141,7 @@ function registerApiRoutes() {
       entityId: item.id,
       previousState: prev,
       newState: item.resolutionStatus,
-      reason: item.resolutionNote,
+      reason: noteText,
     });
 
     saveDatabase();

@@ -7,7 +7,28 @@ import {
   setDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import firebaseConfig from '../../firebase-applet-config.json';
+const configModules = import.meta.glob('../../firebase-applet-config.json', {
+  eager: true,
+  import: 'default',
+}) as Record<string, Record<string, string>>;
+
+const loadedConfig = Object.values(configModules)[0] || {};
+
+const firebaseConfig = {
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || loadedConfig.projectId || 'gen-lang-client-0527595659',
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || loadedConfig.appId || '1:180565062948:web:5d58d75575cf28f9af6fb1',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || loadedConfig.apiKey || 'AIzaSyAbGgStXG2WdfQrGwOszbF5iEMUMTOLCz4',
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || loadedConfig.authDomain || 'gen-lang-client-0527595659.firebaseapp.com',
+  firestoreDatabaseId:
+    import.meta.env.VITE_FIREBASE_DATABASE_ID ||
+    loadedConfig.firestoreDatabaseId ||
+    'ai-studio-proofmeshai-601cffd4-5f0c-415e-ad7c-8727feba36d0',
+  storageBucket:
+    import.meta.env.VITE_FIREBASE_STORAGE_BUCKET ||
+    loadedConfig.storageBucket ||
+    'gen-lang-client-0527595659.firebasestorage.app',
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || loadedConfig.messagingSenderId || '180565062948',
+};
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);

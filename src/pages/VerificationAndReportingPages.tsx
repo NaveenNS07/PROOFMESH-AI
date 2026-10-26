@@ -286,14 +286,14 @@ export const InfrastructureReviewPage: React.FC = () => {
                 <span className="font-mono text-xs text-[#617384]">pHash: {selectedAsset.perceptualHash}</span>
               </div>
 
-              {/* Architectural Schematic / Lab Visual Blueprint SVG */}
-              <div className="rounded border border-[#DCE5EC] bg-[#10243A] p-4 text-white">
-                <div className="flex items-center justify-between text-[11px] font-mono text-[#27A6A1] mb-2">
+              {/* Architectural Schematic / Lab Visual Blueprint SVG — Crisp Light Blueprint Theme */}
+              <div className="rounded-lg border border-[#DCE5EC] bg-[#F8FAFC] p-4 text-[#0F172A]">
+                <div className="flex items-center justify-between text-[11px] font-mono font-semibold text-[#087F8C] mb-2">
                   <span>CAD / ARCHITECTURAL & VISUAL EVIDENCE OVERLAY</span>
                   <span>DIMENSIONS: {selectedAsset.dimensionsOrArea}</span>
                 </div>
-                <svg viewBox="0 0 640 220" className="w-full h-48 border border-[#183B56] bg-[#0B1929] rounded">
-                  <g stroke="#183B56" strokeWidth="1">
+                <svg viewBox="0 0 640 220" className="w-full h-48 border border-[#DCE5EC] bg-white rounded">
+                  <g stroke="#E2E8F0" strokeWidth="1">
                     <line x1="0" y1="55" x2="640" y2="55" />
                     <line x1="0" y1="110" x2="640" y2="110" />
                     <line x1="0" y1="165" x2="640" y2="165" />
@@ -306,15 +306,14 @@ export const InfrastructureReviewPage: React.FC = () => {
                     y="25"
                     width="260"
                     height="165"
-                    fill="#087F8C"
-                    fillOpacity="0.18"
-                    stroke="#27A6A1"
+                    fill="#F0FDFA"
+                    stroke="#087F8C"
                     strokeWidth="2"
                   />
-                  <text x="55" y="50" fill="#FFFFFF" fontSize="11" fontFamily="IBM Plex Mono" fontWeight="700">
+                  <text x="55" y="50" fill="#0F172A" fontSize="11" fontFamily="IBM Plex Mono" fontWeight="700">
                     PRIMARY ZONE: {selectedAsset.evidenceTitle.slice(0, 26)}
                   </text>
-                  <text x="55" y="70" fill="#27A6A1" fontSize="10" fontFamily="IBM Plex Mono">
+                  <text x="55" y="70" fill="#087F8C" fontSize="10" fontFamily="IBM Plex Mono" fontWeight="600">
                     {selectedAsset.dimensionsOrArea}
                   </text>
 
@@ -323,18 +322,24 @@ export const InfrastructureReviewPage: React.FC = () => {
                     y="25"
                     width="265"
                     height="165"
-                    fill={selectedAsset.duplicateDetectedWithId ? '#B42318' : '#18794E'}
-                    fillOpacity="0.18"
-                    stroke={selectedAsset.duplicateDetectedWithId ? '#B42318' : '#27A6A1'}
+                    fill={selectedAsset.duplicateDetectedWithId ? '#FEF2F2' : '#ECFDF5'}
+                    stroke={selectedAsset.duplicateDetectedWithId ? '#B42318' : '#18794E'}
                     strokeWidth="2"
                     strokeDasharray={selectedAsset.duplicateDetectedWithId ? '5,4' : undefined}
                   />
-                  <text x="350" y="50" fill="#FFFFFF" fontSize="11" fontFamily="IBM Plex Mono" fontWeight="700">
+                  <text x="350" y="50" fill="#0F172A" fontSize="11" fontFamily="IBM Plex Mono" fontWeight="700">
                     {selectedAsset.duplicateDetectedWithId
                       ? `DUPLICATE PHOTO MATCH (${Math.round(selectedAsset.similarityScore * 100)}%)`
                       : 'SANCTIONED FLOOR PLAN'}
                   </text>
-                  <text x="350" y="72" fill="#DCE5EC" fontSize="10" fontFamily="IBM Plex Mono">
+                  <text
+                    x="350"
+                    y="72"
+                    fill={selectedAsset.duplicateDetectedWithId ? '#B42318' : '#18794E'}
+                    fontSize="10"
+                    fontFamily="IBM Plex Mono"
+                    fontWeight="600"
+                  >
                     {selectedAsset.duplicateDetectedWithId
                       ? `Reused from ${selectedAsset.duplicateDetectedWithId}`
                       : 'Verified Architectural Geometry'}

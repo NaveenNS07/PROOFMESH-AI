@@ -1,57 +1,114 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.never-dark, .never-dark *));
 
 @layer base {
-  :root {
-    --pm-navy-primary: #10243A;
-    --pm-navy-secondary: #183B56;
-    --pm-teal-primary: #087F8C;
-    --pm-teal-secondary: #27A6A1;
-    --pm-bg: #F4F7FA;
+  :root,
+  html,
+  body {
+    color-scheme: light only;
+    --pm-navy-primary: #0F172A;
+    --pm-navy-secondary: #1E3A8A;
+    --pm-teal-primary: #0D9488;
+    --pm-teal-secondary: #0284C7;
+    --pm-bg: #F8FAFC;
     --pm-surface: #FFFFFF;
-    --pm-surface-subtle: #EDF2F7;
-    --pm-text-primary: #172B3A;
-    --pm-text-secondary: #617384;
-    --pm-border: #DCE5EC;
-    --pm-success: #18794E;
-    --pm-warning: #B7791F;
-    --pm-critical: #B42318;
+    --pm-surface-subtle: #F1F5F9;
+    --pm-text-primary: #0F172A;
+    --pm-text-secondary: #475569;
+    --pm-border: #E2E8F0;
+    --pm-success: #059669;
+    --pm-warning: #D97706;
+    --pm-critical: #E11D48;
     --pm-info: #2563EB;
   }
 
-  .dark {
-    --pm-navy-primary: #091524;
-    --pm-navy-secondary: #10243A;
-    --pm-teal-primary: #27A6A1;
-    --pm-teal-secondary: #38BDF8;
-    --pm-bg: #0B1828;
-    --pm-surface: #10243A;
-    --pm-surface-subtle: #16304B;
-    --pm-text-primary: #F0F5FA;
-    --pm-text-secondary: #94A8BE;
-    --pm-border: #213D5B;
-    --pm-success: #34D399;
-    --pm-warning: #FBBF24;
-    --pm-critical: #F87171;
-    --pm-info: #60A5FA;
-  }
-
   body {
-    font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--pm-bg);
-    color: var(--pm-text-primary);
+    font-family: 'Public Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #F8FAFC;
+    background-image: radial-gradient(1200px circle at 15% 0%, rgba(37, 99, 235, 0.045), rgba(13, 148, 136, 0.035) 45%, transparent 80%);
+    background-attachment: fixed;
+    color: #0F172A;
     -webkit-font-smoothing: antialiased;
     margin: 0;
   }
 
   h1, h2, h3, h4, .font-display {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
   }
 
   .font-mono, .tabular-nums {
     font-family: 'IBM Plex Mono', monospace;
     font-variant-numeric: tabular-nums;
   }
+}
+
+/* Custom sleek scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8FAFC;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Smooth entrance & card elevation animations */
+@keyframes pmFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pmSubtleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.pm-page-enter {
+  animation: pmFadeInUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.pm-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.875rem;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+
+.pm-card:hover {
+  box-shadow: 0 4px 16px -3px rgba(15, 23, 42, 0.07), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  border-color: #CBD5E1;
+}
+
+.pm-card-interactive {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.875rem;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pm-card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -4px rgba(37, 99, 235, 0.09), 0 4px 10px -2px rgba(13, 148, 136, 0.05);
+  border-color: #93C5FD;
 }
 
 @media (prefers-reduced-motion: reduce) {

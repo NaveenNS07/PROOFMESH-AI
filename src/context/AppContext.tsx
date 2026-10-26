@@ -55,13 +55,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
   const [unreadNotificationsCount, setUnreadNotificationsCount] = useState<number>(4);
 
-  const setTheme = useCallback((next: 'light' | 'dark') => {
-    setThemeState(next);
-    if (next === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+  useEffect(() => {
+    document.documentElement.classList.remove('dark');
+  }, []);
+
+  const setTheme = useCallback((_next: 'light' | 'dark') => {
+    setThemeState('light');
+    document.documentElement.classList.remove('dark');
   }, []);
 
   const addToast = useCallback((toast: Omit<ToastMessage, 'id'>) => {
