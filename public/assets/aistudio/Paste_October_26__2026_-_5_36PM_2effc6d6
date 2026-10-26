@@ -1,0 +1,2135 @@
+# PROJECT: PROOFMESH AI
+
+## 1. PROJECT IDENTITY
+
+Product Name: PROOFMESH AI
+
+Tagline: Every Claim. Connected to Evidence.
+
+Problem Statement ID: 26261
+
+Organization: All India Council for Technical Education (AICTE)
+
+Department: Regulation Bureau
+
+Category: Software
+
+Theme: Smart Automation
+
+Product Type: AI-powered regulatory application validation, document authentication, compliance assistance, and evidence intelligence platform.
+
+Primary Objective:
+
+Build a fully functional, secure, professional, AI-powered regulatory intelligence platform that assists authorized regulatory officials in validating technical institution applications, authenticating supporting documents, detecting inconsistencies, evaluating configurable compliance requirements, and prioritizing cases for further verification.
+
+The platform must go beyond a conventional document management system.
+
+Its central innovation is a Claim-to-Evidence Intelligence Engine that connects:
+
+- Institutional claims
+- Uploaded documents
+- Extracted information
+- Historical institutional records
+- Configurable regulatory requirements
+- Authorized verification sources
+- Detected inconsistencies
+- Reviewer decisions
+- Audit events
+
+Every important finding must be traceable to evidence, explainable to a reviewer, and linked to a recommended next action.
+
+The platform must retain human authority over regulatory scrutiny, inspections, and final decisions.
+
+IMPORTANT:
+
+Build a working application, not a static UI prototype.
+
+All primary buttons, forms, tables, filters, uploads, workflows, graphs, reports, notifications, and navigation must function.
+
+Do not create fake buttons, placeholder pages, or interactions that only display success messages without performing an operation.
+
+Do not claim that a document is officially verified unless a genuine authorized source has returned a verifiable result.
+
+Use clearly labeled synthetic records and simulated verification responses when official integration credentials are unavailable.
+
+---
+
+# 2. PRODUCT DESIGN PHILOSOPHY
+
+The interface must communicate:
+
+1. Trust
+2. Regulatory precision
+3. Evidence-backed intelligence
+4. Transparency
+5. Security
+6. Accountability
+7. Operational efficiency
+8. Human oversight
+
+The application must not resemble a generic SaaS analytics dashboard, cryptocurrency interface, gaming interface, or ordinary AI chatbot website.
+
+It should resemble a sophisticated regulatory case-management and evidence-intelligence platform used by professional government officials.
+
+Every screen must answer at least one important question:
+
+- What needs attention?
+- Why does it matter?
+- What evidence supports this finding?
+- Which rule was applied?
+- What should happen next?
+- Who is responsible for the next action?
+- What has already been verified?
+- What remains uncertain?
+
+Use visual hierarchy to make these answers immediately understandable.
+
+---
+
+# 3. PROFESSIONAL UI/UX DESIGN SYSTEM
+
+## Theme Name
+
+PROOFMESH Regulatory Intelligence — Institutional Dark and Light Interface.
+
+Provide both light and dark themes.
+
+Default theme: Professional light theme.
+
+Optional theme: Deep navy dark theme.
+
+## Color Palette
+
+Primary navy:
+#10243A
+
+Secondary navy:
+#183B56
+
+Primary accent teal:
+#087F8C
+
+Secondary accent:
+#27A6A1
+
+Background:
+#F4F7FA
+
+Surface:
+#FFFFFF
+
+Primary text:
+#172B3A
+
+Secondary text:
+#617384
+
+Border:
+#DCE5EC
+
+Success:
+#18794E
+
+Warning:
+#B7791F
+
+Critical:
+#B42318
+
+Information:
+#2563EB
+
+Colors must never be the only way to communicate a status. Include readable labels and appropriate icons.
+
+## Typography
+
+Use Inter or a similar highly readable professional font.
+
+Use a consistent hierarchy for:
+
+- Page titles
+- Section headings
+- Body text
+- Table headers
+- Metadata
+- Status labels
+- Numerical indicators
+
+Avoid excessive font sizes, decorative typography, and unnecessary uppercase text.
+
+## Layout
+
+Create a responsive application shell with:
+
+- Fixed or collapsible left sidebar
+- Top navigation bar
+- Breadcrumb navigation
+- Main content area
+- Contextual right-side panels where useful
+- Search and notification controls
+- User profile menu
+- Global application status indicators
+
+Desktop experience should be the priority, but all pages must remain usable on tablets and mobile screens.
+
+Use consistent spacing, subtle borders, restrained shadows, rounded corners, and professional data tables.
+
+Avoid excessive gradients, glowing effects, giant hero sections, oversized cards, and unnecessary animations.
+
+Animations should be subtle and functional.
+
+## Sidebar
+
+Organize the sidebar into these groups.
+
+OVERVIEW
+- Dashboard
+- My Work Queue
+- Application Registry
+
+INTELLIGENCE
+- Document Intelligence
+- Validation Center
+- Evidence Graph
+- Regulatory Change Impact
+- Compliance Assessment
+
+VERIFICATION
+- Source Verification
+- Infrastructure Review
+
+REPORTING
+- Reports and Analytics
+- Audit Trail
+- Notifications
+
+ADMINISTRATION
+- Regulatory Rules
+- Data Sources
+- User and Role Management
+- System Settings
+
+All navigation items must lead to real pages.
+
+Use active navigation states, accessible tooltips, icons, and consistent page headers.
+
+---
+
+# 4. USER ROLES AND PERMISSIONS
+
+Implement role-based access control.
+
+## Role 1: Regulatory Administrator
+
+Permissions:
+
+- Configure regulatory rules
+- Manage users and roles
+- Configure authorized verification sources
+- View permitted application records
+- Review system health
+- Access authorized audit records
+- Configure application workflows
+
+## Role 2: Regulatory Officer
+
+Permissions:
+
+- Review assigned applications
+- Inspect validation findings
+- Examine evidence
+- Request additional information
+- Accept or dismiss individual findings with reasons
+- Escalate cases
+- Record review recommendations
+
+The role must not automatically grant authority to make statutory decisions.
+
+## Role 3: Institution Compliance Officer
+
+Permissions:
+
+- Create institution applications
+- Upload supporting documents
+- Review permitted deficiencies
+- Submit corrections
+- Track verification status
+- Respond to requests for additional evidence
+
+Institution users must not access other institutions' confidential applications.
+
+## Role 4: Infrastructure Reviewer
+
+Permissions:
+
+- Review assigned infrastructure evidence
+- Examine photographs, floor plans, and submitted records
+- Record observations
+- Flag discrepancies
+- Recommend additional evidence or physical inspection
+
+## Role 5: Public User
+
+Permissions:
+
+- Search institution information explicitly made public
+- View relevant official approval records
+- Inspect publication dates and academic periods
+- Open authoritative source references
+
+Public users must never access confidential applications, private documents, internal notes, or restricted audit records.
+
+Enforce permissions on the backend, not only by hiding frontend elements.
+
+---
+
+# 5. COMPLETE APPLICATION PAGE STRUCTURE
+
+Build every page listed below.
+
+## PAGE 1: PROFESSIONAL LANDING PAGE
+
+Route: /
+
+Purpose:
+
+Introduce PROOFMESH AI and explain its regulatory intelligence capabilities.
+
+Sections:
+
+1. Professional header with logo and navigation
+2. Main headline:
+   "Regulatory Intelligence. Grounded in Evidence."
+3. Supporting text describing application validation and document authentication
+4. Primary action: Open Regulatory Workspace
+5. Secondary action: Explore How It Works
+6. Four capability sections:
+   - Intelligent document understanding
+   - Evidence-linked validation
+   - Authorized source verification
+   - Explainable compliance assistance
+7. Process visualization:
+   Application → Evidence Extraction → Validation → Verification → Human Review
+8. Security and accountability section
+9. Public verification feature overview
+10. Footer with product information and disclaimer
+
+Do not display fabricated government endorsements or claim official AICTE approval.
+
+Clearly identify the application as an independent prototype unless an official partnership is established.
+
+## PAGE 2: LOGIN AND AUTHENTICATION
+
+Routes:
+/login
+/register
+/forgot-password
+
+Features:
+
+- Email and password login
+- Registration for permitted account types
+- Password recovery
+- Session management
+- Form validation
+- Loading and error states
+- Secure logout
+- Role-aware redirects
+
+For the prototype, provide clearly labeled demo accounts for each role.
+
+Never expose real credentials in source code or the public repository.
+
+Use secure password hashing and established authentication practices.
+
+## PAGE 3: MAIN DASHBOARD
+
+Route: /dashboard
+
+This is the main regulatory workspace.
+
+### Header
+
+Display:
+
+- Welcome message
+- Current date
+- Global search
+- Notification control
+- User profile
+- Current workspace
+
+### Summary indicators
+
+Display live data for:
+
+- Total applications
+- Applications awaiting review
+- Applications with unresolved discrepancies
+- Source verification pending
+- Applications requiring additional evidence
+- Reviews completed
+
+All values must come from the backend.
+
+### Application Processing Overview
+
+Display:
+
+- Applications received over time
+- Validation outcome distribution
+- Verification status distribution
+- Average processing time
+- Review queue by priority
+
+Use interactive charts with tooltips and appropriate labels.
+
+### Priority Work Queue
+
+Columns:
+
+- Application ID
+- Institution
+- Application category
+- Submission date
+- Validation status
+- Unresolved findings
+- Current owner
+- Next action
+
+Features:
+
+- Search
+- Sorting
+- Filtering
+- Pagination
+- Row selection
+- Export authorized records
+- Open application details
+
+### Recent Activity
+
+Show recent events such as:
+
+- Document uploaded
+- Validation completed
+- Source verification returned
+- Additional evidence requested
+- Reviewer action recorded
+
+Each event must link to the relevant record when the user has permission.
+
+### Operational Alerts
+
+Display:
+
+- Expiring documents
+- Unresolved source mismatches
+- Applications with missing information
+- Verification services unavailable
+- Cases awaiting reviewer action
+
+Provide links to the relevant workflow.
+
+---
+
+## PAGE 4: MY WORK QUEUE
+
+Route: /work-queue
+
+Purpose:
+
+Help each official organize assigned work.
+
+Features:
+
+- Assigned applications
+- Unassigned applications for authorized users
+- Priority filters
+- Due-date filters
+- Status filters
+- Search
+- Bulk assignment where permitted
+- Reviewer assignment
+- Escalation
+- Review history
+- Workload distribution
+
+Statuses:
+
+- New
+- Processing
+- Findings Generated
+- Awaiting Source Verification
+- Awaiting Institution Response
+- Awaiting Manual Review
+- Review Completed
+- Closed
+
+Do not equate a completed automated validation with a final regulatory decision.
+
+---
+
+## PAGE 5: APPLICATION REGISTRY
+
+Route: /applications
+
+Create a searchable institutional application registry.
+
+Filters:
+
+- Application category
+- Institution
+- Academic year
+- Submission date
+- Application status
+- Verification status
+- Compliance review status
+
+Table fields:
+
+- Application ID
+- Institution name
+- Application type
+- Academic year
+- Submission date
+- Documents received
+- Validation status
+- Open findings
+- Assigned reviewer
+- Last updated
+
+Actions:
+
+- Open application
+- View findings
+- Upload additional evidence
+- Assign reviewer
+- Export permitted records
+- View history
+
+Include empty states, loading states, error states, and pagination.
+
+---
+
+## PAGE 6: APPLICATION INTAKE
+
+Route: /applications/new
+
+Create a guided application creation workflow.
+
+### Step 1: Institution Details
+
+Fields:
+
+- Institution identifier
+- Institution name
+- Institution type
+- State
+- District
+- Application category
+- Academic year
+- Authorized contact details
+
+### Step 2: Application Details
+
+Collect the fields applicable to the selected category.
+
+### Step 3: Supporting Documents
+
+Allow multiple file uploads.
+
+Supported formats:
+
+- PDF
+- PNG
+- JPG
+- JPEG
+
+Validate file type and file size.
+
+Display upload progress, filename, file size, and upload status.
+
+### Step 4: Review
+
+Show all entered details and uploaded documents.
+
+### Step 5: Submit
+
+Persist the application and create an auditable submission event.
+
+Use category-specific configurable document checklists.
+
+Do not hardcode assumptions about every application category.
+
+---
+
+## PAGE 7: APPLICATION DETAIL WORKSPACE
+
+Route: /applications/:applicationId
+
+This is one of the most important pages.
+
+Use a structured multi-panel layout.
+
+### Top summary
+
+Display:
+
+- Application ID
+- Institution name
+- Application category
+- Academic year
+- Submission date
+- Current workflow status
+- Assigned reviewer
+
+### Tabs
+
+1. Overview
+2. Documents
+3. Validation Findings
+4. Evidence Graph
+5. Compliance
+6. Source Verification
+7. Historical Changes
+8. Review Actions
+9. Audit History
+
+### Overview
+
+Show application metadata, completeness, outstanding actions, and processing history.
+
+### Documents
+
+Show all submitted files, classification results, extraction status, and verification state.
+
+### Validation Findings
+
+Show missing fields, expired documents, conflicting values, duplicate documents, and other anomalies.
+
+### Review Actions
+
+Allow authorized users to:
+
+- Accept a finding
+- Dismiss a finding with justification
+- Request additional evidence
+- Escalate to another reviewer
+- Add an internal observation
+- Record a review recommendation
+
+Every action must be saved and traceable.
+
+---
+
+## PAGE 8: DOCUMENT INTELLIGENCE
+
+Route: /document-intelligence
+
+Purpose:
+
+Provide document extraction, classification, and preliminary forensic analysis.
+
+### Document Upload
+
+Provide:
+
+- Drag-and-drop upload
+- File picker
+- Multiple file upload
+- Progress indicator
+- Upload validation
+- Processing status
+
+### Document Classification
+
+Classify uploaded files into configurable types, such as:
+
+- Approval letter
+- Affidavit or undertaking
+- Accreditation certificate
+- NOC or permission
+- Faculty record
+- Infrastructure evidence
+- Fee payment evidence
+- Compliance report
+- Other supporting document
+
+Classification must include confidence scores.
+
+### OCR and Extraction
+
+Extract available fields such as:
+
+- Document number
+- Institution name
+- Issuing authority
+- Issue date
+- Expiry date
+- Academic year
+- Relevant identifiers
+- Key amounts where applicable
+- Names and structured fields required by the applicable checklist
+
+Store the extracted text and field-level confidence.
+
+### Document Viewer
+
+Include:
+
+- PDF or image preview
+- Extracted text panel
+- Field-level extraction results
+- Search within document
+- Highlighted evidence regions when available
+- Download controls subject to permissions
+
+Clicking an extracted field should navigate to the corresponding page or region when that information is available.
+
+### Preliminary Anomaly Detection
+
+Check for:
+
+- Duplicate files
+- Matching file hashes
+- Similar document contents
+- Conflicting identifiers
+- Unusual date combinations
+- Suspicious metadata changes
+- Potentially altered text or visual regions when supported by suitable algorithms
+
+Distinguish deterministic findings from heuristic findings.
+
+A matching hash establishes byte-level identity, not authenticity.
+
+Metadata irregularities and image differences are indicators for further examination, not proof of forgery.
+
+---
+
+## PAGE 9: VALIDATION CENTER
+
+Route: /validation-center
+
+This page displays the results of configurable validation checks.
+
+Categories:
+
+1. Completeness
+2. Expiry
+3. Internal consistency
+4. Cross-document consistency
+5. Institutional record consistency
+6. Source verification
+7. Regulatory requirements
+8. Potential document anomalies
+
+Each finding must contain:
+
+- Finding ID
+- Application ID
+- Finding category
+- Severity
+- Confidence where relevant
+- Description
+- Evidence reference
+- Rule identifier
+- Expected value
+- Observed value
+- Recommended action
+- Review status
+- Assigned reviewer
+
+### Severity labels
+
+- Critical Review
+- High Priority
+- Medium Priority
+- Low Priority
+- Informational
+
+Severity indicates review priority, not guilt or proof of misconduct.
+
+### Interactions
+
+- Filter findings
+- Sort by severity
+- Search applications
+- Open supporting evidence
+- Compare extracted values
+- Assign reviewers
+- Mark findings as reviewed
+- Request correction
+- Export a report
+
+Never silently discard uncertain findings.
+
+---
+
+## PAGE 10: SIGNATURE FEATURE — CLAIM-TO-EVIDENCE GRAPH
+
+Route: /evidence-graph
+
+This must be the signature visual feature of PROOFMESH AI.
+
+Build an interactive graph that represents:
+
+- Application claims
+- Supporting documents
+- Extracted values
+- Institutional records
+- Regulatory rules
+- Verification sources
+- Findings
+- Reviewer decisions
+
+### Graph behavior
+
+Nodes represent evidence entities.
+
+Edges describe relationships such as:
+
+- Supported by
+- Extracted from
+- Conflicts with
+- Verified against
+- Required by
+- Supersedes
+- Reviewed by
+
+When a user clicks a node, display a contextual details panel.
+
+For example:
+
+Claim:
+Faculty count = 48
+
+Document:
+Faculty Statement, Page 4
+
+Institutional Record:
+Faculty Register, Previous Submission
+
+Rule:
+Faculty documentation requirement configured for the application category
+
+Finding:
+Observed values differ
+
+Recommended Action:
+Review the discrepancy and obtain additional evidence if necessary.
+
+Do not assume a particular faculty requirement is universally applicable. Use a configurable rule or a clearly labeled synthetic example.
+
+### Graph controls
+
+- Zoom
+- Pan
+- Fit to screen
+- Search nodes
+- Filter by node type
+- Filter by finding severity
+- Show or hide relationships
+- Focus on a finding
+- Export graph image
+- Open source evidence
+
+Use a graph visualization library such as React Flow or Cytoscape.js.
+
+The graph must represent persisted backend data, not a static decorative illustration.
+
+---
+
+## PAGE 11: REGULATORY CHANGE IMPACT ENGINE
+
+Route: /change-impact
+
+This is the second signature feature.
+
+Purpose:
+
+Identify potentially significant differences between historical and current institutional records.
+
+### Comparison inputs
+
+- Previous application
+- Current application
+- Previous extracted record
+- Current extracted record
+- Relevant configured regulatory rules
+
+### Comparison output
+
+Show:
+
+- Previous value
+- Current value
+- Difference
+- Source document for each value
+- Date of each record
+- Applicable rule
+- Verification status
+- Potential impact
+- Recommended review action
+
+### Example
+
+Previous record:
+
+Approved intake: 60
+
+New application:
+
+Requested intake: 120
+
+System output:
+
+"Requested intake differs from the previous approved record. This is a change requiring review against the applicable rules and official approval records."
+
+The system must not conclude that the change is unauthorized merely because the numbers differ.
+
+### Change classification
+
+- No material difference detected
+- New information
+- Updated information
+- Conflicting information
+- Potentially significant regulatory change
+- Insufficient evidence
+
+Allow authorized users to review and resolve each change.
+
+---
+
+## PAGE 12: COMPLIANCE ASSESSMENT
+
+Route: /compliance
+
+Purpose:
+
+Assist officials in checking application evidence against configured regulatory requirements.
+
+### Requirement categories
+
+- Institutional records
+- Programme or course information
+- Faculty documentation
+- Accreditation and certification
+- Permissions and NOCs
+- Infrastructure documentation
+- Fee and payment evidence
+- Other category-specific requirements
+
+The applicable categories must come from the configured checklist.
+
+### Compliance table
+
+Columns:
+
+- Requirement ID
+- Requirement
+- Applicable application category
+- Evidence required
+- Evidence supplied
+- Validation result
+- Evidence reference
+- Review status
+- Next action
+
+### Outcomes
+
+- Evidence Present
+- Evidence Missing
+- Evidence Incomplete
+- Potential Mismatch
+- Source Verification Pending
+- Manual Review Required
+- Not Applicable
+
+A requirement can only be marked Not Applicable when the configured rule or authorized reviewer supports that outcome.
+
+### Rule details
+
+Clicking a requirement opens:
+
+- Rule identifier
+- Rule text
+- Source document or authorized reference
+- Effective period
+- Applicable categories
+- Validation method
+- Version
+- Last updated
+- Approval status of the rule configuration
+
+Do not invent official regulatory clauses.
+
+Use synthetic rules for demonstrations and label them clearly until actual authorized regulatory requirements are configured and verified.
+
+---
+
+## PAGE 13: SOURCE VERIFICATION CENTER
+
+Route: /verification
+
+Purpose:
+
+Manage document authentication through supported official sources.
+
+### Verification methods
+
+Where supported and authorized:
+
+- Official issuing-authority API
+- Official verification portal
+- Digital signature validation
+- QR code verification
+- Digital repository reference
+- Unique certificate or document identifier
+- Manual authority confirmation
+
+### Verification statuses
+
+- Verified
+- Mismatch Detected
+- Expired
+- Verification Pending
+- Source Unavailable
+- Manual Review Required
+- Inconclusive
+
+### Verification record
+
+Store:
+
+- Document identifier
+- Source authority
+- Verification method
+- Request timestamp
+- Response timestamp
+- Returned result
+- Relevant matched fields
+- Source response reference
+- Verification status
+- Reviewer action
+
+Never use a successful HTTP response alone as proof that a document is authentic.
+
+### Simulated verification mode
+
+Provide a clearly labeled demo environment with synthetic source responses.
+
+For example:
+
+Document submitted:
+Certificate reference CERT-DEMO-104
+
+Simulated source response:
+Reference exists in synthetic test records.
+
+Result:
+Demo Match — Not Officially Verified
+
+The interface must make it impossible to confuse simulated results with actual official verification.
+
+---
+
+## PAGE 14: INFRASTRUCTURE REVIEW
+
+Route: /infrastructure-review
+
+Purpose:
+
+Assist authorized reviewers in examining submitted infrastructure evidence.
+
+### Evidence types
+
+- Classroom photographs
+- Laboratory photographs
+- Library photographs
+- Floor plans
+- Building plans
+- Infrastructure certificates
+- Video evidence where supported
+
+### Features
+
+- Image and document viewer
+- Evidence categorization
+- Image metadata display
+- Duplicate image detection
+- Similarity comparison
+- Configurable checklist
+- Reviewer annotations
+- Additional evidence requests
+- Inspection referral
+
+### Computer vision
+
+Where suitable models are available, assist with:
+
+- Image classification
+- Duplicate or near-duplicate image detection
+- Basic visual discrepancy detection
+- Document-to-image association
+
+Do not claim that a photograph proves physical infrastructure compliance.
+
+Automated analysis must remain advisory. The platform must support requests for additional evidence and referrals for physical inspection.
+
+---
+
+## PAGE 15: REPORTS AND ANALYTICS
+
+Route: /reports
+
+Generate reports from persisted application and validation data.
+
+### Reports
+
+- Application Validation Report
+- Document Completeness Report
+- Cross-Document Discrepancy Report
+- Source Verification Report
+- Compliance Assessment Report
+- Regulatory Change Impact Report
+- Pending Review Report
+- Processing Time Report
+- Audit Activity Report
+
+### Report contents
+
+Include:
+
+- Report identifier
+- Application identifier
+- Generation timestamp
+- Scope
+- Validation rules applied
+- Findings
+- Evidence references
+- Verification statuses
+- Unresolved items
+- Reviewer observations
+- Limitations
+- Disclaimer
+
+Provide PDF and CSV export.
+
+Reports must identify simulated data when applicable.
+
+Never label an AI-generated report as an official approval or rejection order.
+
+---
+
+## PAGE 16: AUDIT TRAIL
+
+Route: /audit
+
+Purpose:
+
+Maintain traceability for application processing.
+
+Record events such as:
+
+- Application created
+- Document uploaded
+- Document replaced
+- OCR completed
+- Validation performed
+- Rule version applied
+- Source verification attempted
+- Source response received
+- Finding accepted or dismissed
+- Evidence requested
+- Reviewer assigned
+- Report generated
+- Configuration changed
+
+### Audit fields
+
+- Event ID
+- Timestamp
+- Actor
+- Actor role
+- Action
+- Entity type
+- Entity identifier
+- Previous state where applicable
+- New state where applicable
+- Reason
+- Correlation identifier
+
+Use append-only event records with appropriate tamper-evident controls.
+
+Restrict audit access by role.
+
+Do not store passwords, access tokens, or unnecessary sensitive document contents in audit messages.
+
+---
+
+## PAGE 17: NOTIFICATIONS CENTER
+
+Route: /notifications
+
+Features:
+
+- Unread notifications
+- Read notifications
+- Severity
+- Related application
+- Related finding
+- Creation time
+- Mark as read
+- Mark all as read
+- Filter by category
+- Navigate to the related record
+
+Notification categories:
+
+- Missing document
+- Expired document
+- Source mismatch
+- Verification pending
+- New finding
+- Additional evidence requested
+- Reviewer assignment
+- Review completed
+- Rule configuration updated
+
+Provide in-app notifications first.
+
+Email delivery may be added through a properly configured provider.
+
+Do not claim email notifications are working unless delivery has been configured and tested.
+
+---
+
+## PAGE 18: USER AND ROLE MANAGEMENT
+
+Route: /admin/users
+
+Administrator features:
+
+- Create user
+- Edit permitted user information
+- Assign roles
+- Activate or deactivate accounts
+- Assign institution scope
+- Assign review responsibilities
+- View account activity
+
+Enforce backend authorization for every privileged action.
+
+Prevent unauthorized users from changing their own privileges.
+
+---
+
+## PAGE 19: REGULATORY RULE MANAGEMENT
+
+Route: /admin/rules
+
+Purpose:
+
+Manage configurable validation rules.
+
+### Rule fields
+
+- Rule identifier
+- Rule name
+- Description
+- Requirement category
+- Applicable application categories
+- Applicable period
+- Required document type
+- Validation logic
+- Severity
+- Recommended action
+- Authoritative source reference
+- Rule version
+- Effective date
+- Expiry or supersession date
+- Configuration status
+
+### Rule lifecycle
+
+- Draft
+- Under Review
+- Approved for Use
+- Active
+- Superseded
+- Retired
+
+Only authorized users may approve or activate rules.
+
+Maintain version history.
+
+Every validation run must record which rule version it used.
+
+If a rule is changed, preserve the ability to explain historical results.
+
+---
+
+## PAGE 20: DATA SOURCE MANAGEMENT
+
+Route: /admin/data-sources
+
+Purpose:
+
+Manage supported institutional records and verification services.
+
+Features:
+
+- Source name
+- Source authority
+- Source type
+- Supported verification method
+- Integration status
+- Last successful connection
+- Last attempted connection
+- Authentication configuration status
+- Permitted document types
+- Error logs
+- Retry controls
+- Manual verification fallback
+
+Do not display API keys or secrets in the frontend.
+
+Use environment variables or a suitable secret manager.
+
+Support mock adapters for demonstrations and real adapters only when authorized access is available.
+
+---
+
+## PAGE 21: PUBLIC INSTITUTION VERIFICATION
+
+Route: /public/verify
+
+Purpose:
+
+Provide students and parents with a clear view of publicly available institutional approval information.
+
+### Search
+
+Allow users to search by:
+
+- Institution name
+- Institution identifier
+- State
+- District
+- Programme or course where available
+
+### Results
+
+Display only authorized public information, such as:
+
+- Institution identity
+- Relevant official approval status
+- Academic period
+- Approved programme information where published
+- Approved intake where published
+- Source authority
+- Source reference
+- Last checked timestamp
+
+Clearly distinguish:
+
+- Confirmed by an authoritative source
+- Retrieved from an official published record
+- Not found in available records
+- Information unavailable
+- Data requires further confirmation
+
+Never interpret a missing search result as proof that an institution is fraudulent or unapproved.
+
+Do not expose private application records.
+
+---
+
+## PAGE 22: PROFILE AND PERSONAL SETTINGS
+
+Route: /settings/profile
+
+Features:
+
+- User profile
+- Role
+- Institution affiliation where applicable
+- Notification preferences
+- Display theme
+- Language preference
+- Session information
+- Password management
+- Logout
+
+Users must not be allowed to modify server-controlled authorization fields.
+
+---
+
+## PAGE 23: SYSTEM SETTINGS
+
+Route: /admin/settings
+
+Include:
+
+- Application configuration
+- Upload limits
+- Allowed file formats
+- Session settings
+- Data retention policy configuration
+- Notification configuration
+- Logging configuration
+- Theme preferences
+- Demo mode indicator
+- System health information
+
+Sensitive settings must require appropriate permissions.
+
+---
+
+# 6. CORE AI INTELLIGENCE ENGINE
+
+The AI engine must consist of separate, testable components.
+
+## A. Document Classification
+
+Input:
+Uploaded PDF or image.
+
+Output:
+
+- Predicted document type
+- Confidence
+- Extracted text
+- Processing status
+- Relevant page references
+
+Low-confidence classifications must be sent for review.
+
+## B. OCR and Structured Extraction
+
+Extract:
+
+- Dates
+- Identifiers
+- Institution names
+- Certificate numbers
+- Relevant quantities
+- Required application fields
+
+Preserve field-level confidence and source-page references.
+
+Do not silently substitute guessed values for missing information.
+
+## C. Cross-Document Consistency
+
+Compare extracted values across documents.
+
+Example:
+
+Application:
+Institution name = Example Engineering College
+
+Certificate:
+Institution name = Example Technical Institute
+
+Result:
+Potential institution-name mismatch.
+
+The finding must include both source documents, their relevant page references, and the values compared.
+
+## D. Duplicate Detection
+
+Use:
+
+- SHA-256 hashes for exact byte-level duplicates
+- Normalized text similarity
+- Document fingerprints
+- Image similarity where appropriate
+
+Distinguish exact duplicates from similar documents.
+
+## E. Expiry Validation
+
+Use extracted dates and configurable rules.
+
+Handle:
+
+- Missing dates
+- Invalid dates
+- Uncertain date extraction
+- Different date formats
+- Applicable validity periods
+
+Do not infer expiry solely from an arbitrary global time limit.
+
+## F. Regulatory Rules Engine
+
+Implement deterministic checks for requirements such as:
+
+- Required document present
+- Mandatory field populated
+- Date within permitted validity period
+- Identifier matches institutional record
+- Required evidence supplied
+- Applicable category-specific condition satisfied
+
+Keep the rule engine separate from generative AI.
+
+Use approved, versioned rules for actual regulatory validation.
+
+## G. Potential Alteration Detection
+
+Possible signals include:
+
+- Suspicious visual differences
+- Inconsistent text layers
+- Unusual metadata
+- Conflicting dates
+- Duplicate or reused document content
+- Mismatches with authoritative records
+
+Every signal must identify its basis and uncertainty.
+
+Do not present heuristic anomaly scores as probabilities of fraud unless calibrated and validated against appropriate test data.
+
+## H. Natural-Language Explanation
+
+Use AI to summarize findings in clear language.
+
+Every generated explanation must reference the underlying evidence and rule.
+
+The language model must not invent regulatory clauses or source-verification outcomes.
+
+If the evidence is insufficient, it must explicitly say so.
+
+---
+
+# 7. TECHNICAL ARCHITECTURE
+
+Use a maintainable, modular architecture.
+
+## Frontend
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui or an equivalent accessible component library
+- React Router
+- TanStack Query
+- React Hook Form
+- Zod
+- Recharts
+- React Flow or Cytoscape.js
+
+Use a consistent design system and reusable components.
+
+## Backend
+
+- Python
+- FastAPI
+- Pydantic
+- SQLAlchemy
+- Alembic migrations
+- PostgreSQL
+
+Use modular service layers.
+
+Suggested modules:
+
+- Authentication
+- Applications
+- Documents
+- OCR and extraction
+- Validation
+- Regulatory rules
+- Evidence graph
+- Change impact
+- Verification adapters
+- Compliance
+- Review workflows
+- Notifications
+- Reports
+- Audit
+- Administration
+
+## Document Processing
+
+Potential tools:
+
+- PyMuPDF
+- PaddleOCR or Tesseract
+- Pillow
+- python-magic or equivalent file-type validation
+- Appropriate digital-signature validation libraries
+
+Use background processing for long-running document analysis.
+
+## Storage
+
+Use PostgreSQL for structured records.
+
+Use a suitable object store for documents.
+
+For local development, filesystem storage may be used with strict access controls.
+
+Never expose private upload directories directly as public web assets.
+
+## Authentication
+
+Use a secure authentication library or identity provider.
+
+Implement:
+
+- Password hashing
+- Session or token management
+- Authorization checks
+- Session expiration
+- Logout
+- Account status checks
+- Role and institution scoping
+
+## AI Integration
+
+Build provider-independent interfaces for AI services.
+
+Support:
+
+- OCR
+- Optional language-model explanations
+- Optional semantic similarity
+- Optional computer-vision analysis
+
+The core application must still function when an external AI provider is unavailable.
+
+## Deployment
+
+Provide:
+
+- Dockerfiles
+- Docker Compose
+- Environment variable examples
+- Database migrations
+- Development instructions
+- Production deployment instructions
+
+Do not hardcode API keys, credentials, or private endpoints.
+
+---
+
+# 8. DATABASE DESIGN
+
+Create normalized database tables for the following entities.
+
+1. users
+2. roles
+3. user_role_assignments
+4. institutions
+5. applications
+6. application_documents
+7. document_extractions
+8. extracted_fields
+9. validation_runs
+10. validation_findings
+11. regulatory_rules
+12. regulatory_rule_versions
+13. application_rule_results
+14. evidence_nodes
+15. evidence_relationships
+16. source_verification_requests
+17. source_verification_results
+18. compliance_assessments
+19. infrastructure_reviews
+20. historical_record_snapshots
+21. change_impact_findings
+22. reviewer_assignments
+23. review_actions
+24. additional_evidence_requests
+25. notifications
+26. audit_events
+27. report_records
+28. system_configuration
+
+Use UUIDs or another appropriate identifier strategy.
+
+Create foreign keys, indexes, uniqueness constraints, timestamps, and appropriate deletion behavior.
+
+Use database transactions for multi-step operations.
+
+Apply institution-level and role-level access restrictions.
+
+---
+
+# 9. CORE API ENDPOINTS
+
+Implement versioned REST APIs.
+
+Authentication:
+
+POST /api/v1/auth/login
+POST /api/v1/auth/logout
+GET /api/v1/auth/me
+
+Applications:
+
+GET /api/v1/applications
+POST /api/v1/applications
+GET /api/v1/applications/{id}
+PATCH /api/v1/applications/{id}
+POST /api/v1/applications/{id}/submit
+
+Documents:
+
+POST /api/v1/applications/{id}/documents
+GET /api/v1/applications/{id}/documents
+GET /api/v1/documents/{id}
+GET /api/v1/documents/{id}/extraction
+
+Validation:
+
+POST /api/v1/applications/{id}/validate
+GET /api/v1/applications/{id}/findings
+GET /api/v1/findings/{id}
+
+Review:
+
+POST /api/v1/findings/{id}/actions
+POST /api/v1/applications/{id}/request-evidence
+POST /api/v1/applications/{id}/assign-reviewer
+
+Evidence graph:
+
+GET /api/v1/applications/{id}/evidence-graph
+
+Change impact:
+
+POST /api/v1/applications/{id}/compare-history
+GET /api/v1/applications/{id}/change-impact
+
+Verification:
+
+POST /api/v1/documents/{id}/verify
+GET /api/v1/documents/{id}/verification
+
+Compliance:
+
+GET /api/v1/applications/{id}/compliance
+POST /api/v1/applications/{id}/compliance-assessment
+
+Reports:
+
+POST /api/v1/reports
+GET /api/v1/reports
+GET /api/v1/reports/{id}/download
+
+Audit:
+
+GET /api/v1/audit-events
+
+Rules:
+
+GET /api/v1/rules
+POST /api/v1/rules
+PATCH /api/v1/rules/{id}
+
+Public search:
+
+GET /api/v1/public/institutions
+GET /api/v1/public/institutions/{id}
+
+Implement proper request validation, response schemas, pagination, authorization, error handling, and API documentation.
+
+Do not expose sensitive fields through generic list endpoints.
+
+---
+
+# 10. SIGNATURE END-TO-END WORKFLOW
+
+Implement this complete workflow.
+
+STEP 1:
+An authorized institution user creates an application.
+
+STEP 2:
+The user uploads multiple supporting documents.
+
+STEP 3:
+The system validates file formats and stores the documents securely.
+
+STEP 4:
+The document-processing service extracts text and classifies each document.
+
+STEP 5:
+The extraction service stores structured fields and their source-page references.
+
+STEP 6:
+The validation engine runs the applicable configured rules.
+
+STEP 7:
+The cross-document engine compares relevant extracted fields.
+
+STEP 8:
+The evidence graph links findings to source documents and applicable rules.
+
+STEP 9:
+The verification adapter attempts supported source verification.
+
+STEP 10:
+Unresolved mismatches and uncertain findings enter the appropriate review queue.
+
+STEP 11:
+The authorized reviewer examines the evidence and records an action.
+
+STEP 12:
+The institution receives a request for additional evidence if required and permitted.
+
+STEP 13:
+The institution submits the requested evidence.
+
+STEP 14:
+The relevant validation checks run again.
+
+STEP 15:
+The system generates an updated report and preserves the history of earlier findings and actions.
+
+STEP 16:
+The competent authority retains responsibility for any formal regulatory decision.
+
+Every step must persist its results.
+
+---
+
+# 11. SYNTHETIC DEMONSTRATION DATA
+
+Create realistic but entirely fictional demo records.
+
+Example institution:
+
+Institution ID: INST-DEMO-001
+
+Institution Name: Meridian Institute of Technology
+
+Application ID: APP-DEMO-2026-001
+
+Application Category: Demonstration EoA Application
+
+Academic Year: 2026–2027
+
+Label all such records:
+
+"SYNTHETIC DEMONSTRATION DATA — NOT AN OFFICIAL AICTE RECORD"
+
+Create several documents with intentionally planted test cases.
+
+Test case A:
+Required supporting document is missing.
+
+Expected result:
+Missing-document finding.
+
+Test case B:
+Certificate expiry date has passed relative to the configured evaluation date.
+
+Expected result:
+Expired-document finding.
+
+Test case C:
+Two documents contain different institution identifiers.
+
+Expected result:
+Cross-document inconsistency.
+
+Test case D:
+The same file is uploaded twice.
+
+Expected result:
+Exact duplicate detection.
+
+Test case E:
+A previous record and a new application contain different requested intake values.
+
+Expected result:
+Change-impact finding requiring review.
+
+Test case F:
+A verification adapter returns a synthetic mismatch.
+
+Expected result:
+Mismatch Detected — Simulated Source.
+
+Test case G:
+A verification adapter is unavailable.
+
+Expected result:
+Source Unavailable, with manual-review fallback.
+
+Test case H:
+OCR extracts an uncertain date.
+
+Expected result:
+Low-confidence extraction requiring confirmation.
+
+Test case I:
+Infrastructure photographs appear duplicated.
+
+Expected result:
+Potential duplicate evidence; physical compliance remains unconfirmed.
+
+Test case J:
+No discrepancy is found in the tested fields.
+
+Expected result:
+"No discrepancy detected by the checks performed."
+
+Never display "100% compliant" simply because the available checks passed.
+
+---
+
+# 12. TESTING REQUIREMENTS
+
+Create automated tests for:
+
+- Authentication
+- Authorization
+- Institution-level data isolation
+- Application creation
+- Document upload
+- File validation
+- OCR extraction
+- Missing-document detection
+- Expiry validation
+- Duplicate detection
+- Cross-document comparison
+- Rule versioning
+- Source verification status handling
+- Evidence graph relationships
+- Change-impact analysis
+- Reviewer actions
+- Audit event creation
+- Report generation
+- Public information access restrictions
+
+Create a frontend smoke-test suite for navigation and primary workflows.
+
+Test invalid files, missing values, empty states, failed source requests, and malformed API responses.
+
+Never mark a test as passing without actually executing it.
+
+---
+
+# 13. SECURITY AND PRIVACY
+
+Implement:
+
+- Backend-enforced authorization
+- Institution-level data isolation
+- Secure file uploads
+- File size limits
+- MIME and file-signature validation
+- Malware scanning integration where available
+- Encryption in transit
+- Appropriate encryption at rest
+- Secrets management
+- Rate limiting
+- CSRF protection where applicable
+- Safe error messages
+- Security event logging
+- Data-retention controls
+- Restricted document downloads
+- Audit access controls
+
+Treat uploaded files and extracted text as untrusted input.
+
+Prevent prompt injection through document contents by separating extracted data from system instructions and restricting AI tools to explicitly authorized operations.
+
+Never allow text inside a document to modify system rules, grant permissions, or trigger unauthorized actions.
+
+---
+
+# 14. PERFORMANCE AND RELIABILITY
+
+Support asynchronous processing for lengthy documents.
+
+Display:
+
+- Queued
+- Processing
+- Completed
+- Failed
+- Requires Review
+
+Provide retry mechanisms for recoverable errors.
+
+Prevent duplicate processing when a request is retried.
+
+Use idempotency controls for sensitive operations where appropriate.
+
+Paginate large tables.
+
+Avoid loading every application, document, or audit event into the browser at once.
+
+---
+
+# 15. PROFESSIONAL MICRO-INTERACTIONS
+
+Implement:
+
+- Smooth sidebar collapse
+- Accessible dropdown menus
+- Table sorting
+- Search filters
+- Tooltips
+- Contextual drawers
+- Confirmation dialogs
+- Toast notifications
+- Upload progress
+- Skeleton loading states
+- Empty-state guidance
+- Error recovery actions
+- Keyboard navigation
+- Responsive graph interactions
+
+Do not use animations that slow down document review.
+
+Respect reduced-motion preferences.
+
+---
+
+# 16. IMPORTANT DESIGN DETAILS
+
+Create a custom PROOFMESH AI logo based on a connected evidence network or linked document nodes.
+
+Use a compact sidebar logo.
+
+Use a consistent icon set such as Lucide.
+
+Use tables for information that needs comparison.
+
+Use charts only when they answer a meaningful operational question.
+
+Use a split-screen evidence viewer for document review.
+
+Use a right-side details panel for selected findings and evidence nodes.
+
+Use breadcrumbs for deep navigation.
+
+Keep regulatory terminology clear and consistent.
+
+Do not overwhelm users with unnecessary AI-generated text.
+
+Show the evidence first, the explanation second, and the recommended action third.
+
+---
+
+# 17. DEVELOPMENT RULES
+
+Do not implement all pages as isolated mockups.
+
+Build shared components and connect them to real backend services.
+
+Do not store the application's main data only in React state or browser local storage.
+
+Use PostgreSQL as the persistent system of record.
+
+Do not replace real persistence with hardcoded arrays in production components.
+
+Synthetic data may be seeded through database scripts.
+
+All list, detail, filter, upload, and action workflows must call the appropriate API.
+
+Show honest processing states.
+
+Clearly label any simulated integration.
+
+Do not fabricate official AICTE records or regulatory clauses.
+
+Do not claim official government integration without authorized access and a successful integration test.
+
+---
+
+# 18. IMPLEMENTATION ORDER
+
+Develop the application in these phases.
+
+PHASE 1:
+Project setup, design system, authentication, database, and application shell.
+
+PHASE 2:
+Dashboard, application registry, application intake, and application details.
+
+PHASE 3:
+Secure document uploads, PDF processing, OCR, and structured extraction.
+
+PHASE 4:
+Configurable rules engine, validation findings, and cross-document consistency checks.
+
+PHASE 5:
+Interactive Claim-to-Evidence Graph.
+
+PHASE 6:
+Regulatory Change Impact Engine.
+
+PHASE 7:
+Source Verification Center with explicit simulated and real integration modes.
+
+PHASE 8:
+Compliance Assessment and Infrastructure Review.
+
+PHASE 9:
+Reports, Notifications, and Audit Trail.
+
+PHASE 10:
+User Management, Regulatory Rule Management, and Data Source Management.
+
+PHASE 11:
+Public Institution Verification.
+
+PHASE 12:
+Automated tests, security hardening, responsive design, and deployment.
+
+At the end of each phase:
+
+- Run the relevant tests.
+- Fix build and runtime errors.
+- Verify API integration.
+- Check navigation.
+- Confirm permissions.
+- Document any incomplete features.
+
+Do not stop after producing the frontend.
+
+Continue until the application can be started locally and its main end-to-end workflow can be demonstrated.
+
+---
+
+# 19. FINAL ACCEPTANCE CRITERIA
+
+The prototype is ready for demonstration only when:
+
+1. The frontend starts successfully.
+2. The backend starts successfully.
+3. The database persists application records.
+4. Users can authenticate and receive appropriate permissions.
+5. Users can create and view applications.
+6. Multiple documents can be uploaded securely.
+7. Supported documents can be processed.
+8. Extracted fields retain source references.
+9. Validation findings are generated from actual test inputs.
+10. Cross-document discrepancies can be demonstrated.
+11. The Claim-to-Evidence Graph displays persisted relationships.
+12. Historical changes can be compared.
+13. Simulated source verification is clearly labeled.
+14. Review actions persist in the database.
+15. Reports can be generated and downloaded.
+16. Audit events are recorded.
+17. Restricted information is inaccessible to unauthorized roles.
+18. The public verification page exposes only permitted information.
+19. Errors and uncertain results are handled transparently.
+20. Automated tests execute successfully for the core workflow.
+
+The final result must be a coherent regulatory intelligence platform with professional UI/UX, working software workflows, explainable AI-assisted validation, secure document handling, and a compelling live demonstration.
+
+BEGIN IMPLEMENTATION NOW.
+
+First inspect the existing project and its dependencies. Preserve useful working code, identify missing capabilities, and implement the application incrementally. Do not discard an existing project and replace it with another static mockup.

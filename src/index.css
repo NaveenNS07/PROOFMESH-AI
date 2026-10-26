@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --pm-navy-primary: #10243A;
+    --pm-navy-secondary: #183B56;
+    --pm-teal-primary: #087F8C;
+    --pm-teal-secondary: #27A6A1;
+    --pm-bg: #F4F7FA;
+    --pm-surface: #FFFFFF;
+    --pm-surface-subtle: #EDF2F7;
+    --pm-text-primary: #172B3A;
+    --pm-text-secondary: #617384;
+    --pm-border: #DCE5EC;
+    --pm-success: #18794E;
+    --pm-warning: #B7791F;
+    --pm-critical: #B42318;
+    --pm-info: #2563EB;
+  }
+
+  .dark {
+    --pm-navy-primary: #091524;
+    --pm-navy-secondary: #10243A;
+    --pm-teal-primary: #27A6A1;
+    --pm-teal-secondary: #38BDF8;
+    --pm-bg: #0B1828;
+    --pm-surface: #10243A;
+    --pm-surface-subtle: #16304B;
+    --pm-text-primary: #F0F5FA;
+    --pm-text-secondary: #94A8BE;
+    --pm-border: #213D5B;
+    --pm-success: #34D399;
+    --pm-warning: #FBBF24;
+    --pm-critical: #F87171;
+    --pm-info: #60A5FA;
+  }
+
+  body {
+    font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--pm-bg);
+    color: var(--pm-text-primary);
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.015em;
+  }
+
+  .font-mono, .tabular-nums {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

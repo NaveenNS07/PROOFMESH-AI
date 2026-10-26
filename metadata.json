@@ -1,0 +1,6 @@
+{
+  "name": "PROOFMESH AI",
+  "description": "AI-powered regulatory application validation, document authentication, compliance assistance, and evidence intelligence platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
