@@ -24,7 +24,7 @@ import {
   UserRole,
 } from '../types/domain';
 
-const STORAGE_KEY = 'pm_local_db_v1';
+const STORAGE_KEY = 'pm_local_db_v2';
 
 function getDb(): DatabaseSchema {
   try {
@@ -112,6 +112,16 @@ export async function executeLocalApiFallback<T = any>(
     db.users.find((u) => u.id === activeUserId) ||
     db.users.find((u) => u.id === 'USR-OFF-01') ||
     db.users[0];
+
+  if (pathname === '/api/v1/demo/reset' && method === 'POST') {
+    const freshSeed = createInitialSeedDatabase();
+    saveDb(freshSeed);
+    return {
+      status: 'reset_complete',
+      applicationsCount: freshSeed.applications.length,
+      institutionsCount: freshSeed.institutions.length,
+    } as unknown as T;
+  }
 
   // 1. Auth endpoints
   if (pathname === '/api/v1/auth/me') {

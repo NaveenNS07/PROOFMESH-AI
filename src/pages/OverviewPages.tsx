@@ -132,6 +132,22 @@ export const DashboardPage: React.FC = () => {
     });
   }, [data, queueSearch, statusFilter]);
 
+  const handleResetSampleData = async () => {
+    try {
+      const res = await apiFetch<{ applicationsCount: number; institutionsCount: number }>('/api/v1/demo/reset', {
+        method: 'POST',
+      });
+      await loadSummary();
+      addToast({
+        title: 'Sample Dataset Loaded',
+        description: `Populated ${res.applicationsCount || 6} sample applications and ${res.institutionsCount || 6} institutions.`,
+        variant: 'success',
+      });
+    } catch (e: any) {
+      addToast({ title: 'Sample Reset Failed', description: e.message, variant: 'critical' });
+    }
+  };
+
   if (loading || !data) {
     return (
       <div className="space-y-4">
@@ -159,14 +175,22 @@ export const DashboardPage: React.FC = () => {
             Welcome, {currentUser.fullName}
           </h1>
           <p className="text-xs text-[#475569]">
-            6-Layer Deterministic Compliance Engine &amp; Claim-to-Evidence Graph Intelligence Active
+            6-Layer Deterministic Compliance Engine &amp; Claim-to-Evidence Graph Intelligence Active · 6 Sample Applications Pre-Loaded
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <button
+            type="button"
+            onClick={handleResetSampleData}
+            className="inline-flex items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-[#1E40AF] bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl shadow-2xs hover:bg-[#DBEAFE] transition-all cursor-pointer"
+          >
+            <FilePlus2 className="w-3.5 h-3.5 text-[#2563EB]" />
+            <span>Reload Sample Dataset</span>
+          </button>
           <button
             type="button"
             onClick={loadSummary}
-            className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-[#0F172A] bg-white border border-[#CBD5E1] rounded-xl shadow-2xs hover:bg-[#F8FAFC] hover:border-[#94A3B8] transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-[#0F172A] bg-white border border-[#CBD5E1] rounded-xl shadow-2xs hover:bg-[#F8FAFC] hover:border-[#94A3B8] transition-all cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5 text-[#0D9488]" />
             <span>Refresh Live Metrics</span>
@@ -1117,7 +1141,7 @@ export const ApplicationIntakePage: React.FC = () => {
       });
       addToast({
         title: `Application ${res.application.applicationCode} Created`,
-        description: 'Persisted to backend database and audit trail.',
+        description: 'Persisted to sample database and tamper-evident audit trail.',
         variant: 'success',
       });
       navigate(`/applications/${res.application.id}`);
@@ -1128,19 +1152,131 @@ export const ApplicationIntakePage: React.FC = () => {
     }
   };
 
+  const applySamplePreset = (presetKey: 'APEX_AI' | 'KAVERI_RENEWAL' | 'HIMALAYA_ROBOTICS') => {
+    if (presetKey === 'APEX_AI') {
+      setInstitutionId('INST-SAMPLE-101');
+      setInstitutionName('Apex Institute of Artificial Intelligence & Engineering');
+      setInstitutionType('Autonomous Technical Institution');
+      setState('Karnataka');
+      setDistrict('Mysuru');
+      setCategory('Intake Expansion & New Programme');
+      setAcademicYear('2026–2027');
+      setContactName('Dr. Prakash Narayanan');
+      setContactEmail('registrar@apexai-demo.edu.in');
+      setContactPhone('+91-821-2445566');
+      setProgrammeName('B.Tech Artificial Intelligence & Data Engineering');
+      setPreviousApprovedIntake(60);
+      setRequestedIntake(120);
+      setFacultyCountClaimed(56);
+      setBuiltUpAreaSqmClaimed(16800);
+      setUploadedFiles([
+        { filename: 'apex_eoa_approval_2025.pdf', fileSizeBytes: 412000, mimeType: 'application/pdf', documentType: 'Approval letter', status: 'Validated & Ready' },
+        { filename: 'apex_notarized_affidavit_2026.pdf', fileSizeBytes: 289000, mimeType: 'application/pdf', documentType: 'Affidavit or undertaking', status: 'Validated & Ready' },
+        { filename: 'vtu_university_noc_2026.pdf', fileSizeBytes: 354000, mimeType: 'application/pdf', documentType: 'NOC or permission', status: 'Validated & Ready' },
+        { filename: 'apex_faculty_roster_2026.pdf', fileSizeBytes: 518000, mimeType: 'application/pdf', documentType: 'Faculty record', status: 'Validated & Ready' },
+        { filename: 'apex_campus_floorplan_2026.pdf', fileSizeBytes: 742000, mimeType: 'application/pdf', documentType: 'Infrastructure evidence', status: 'Validated & Ready' },
+        { filename: 'apex_regulatory_fee_receipt.pdf', fileSizeBytes: 194000, mimeType: 'application/pdf', documentType: 'Fee payment evidence', status: 'Validated & Ready' },
+      ]);
+    } else if (presetKey === 'KAVERI_RENEWAL') {
+      setInstitutionId('INST-SAMPLE-202');
+      setInstitutionName('Kaveri College of Technology & Sciences');
+      setInstitutionType('Private Self-Financed Technical Institution');
+      setState('Tamil Nadu');
+      setDistrict('Coimbatore');
+      setCategory('Annual Extension of Approval (EoA)');
+      setAcademicYear('2026–2027');
+      setContactName('Prof. Lakshmi Balasubramanian');
+      setContactEmail('compliance@kaveritech-demo.edu.in');
+      setContactPhone('+91-422-2567890');
+      setProgrammeName('B.E. Electronics & VLSI Design');
+      setPreviousApprovedIntake(120);
+      setRequestedIntake(120);
+      setFacultyCountClaimed(42);
+      setBuiltUpAreaSqmClaimed(13200);
+      setUploadedFiles([
+        { filename: 'kaveri_prior_approval_2025.pdf', fileSizeBytes: 390000, mimeType: 'application/pdf', documentType: 'Approval letter', status: 'Validated & Ready' },
+        { filename: 'kaveri_statutory_undertaking.pdf', fileSizeBytes: 265000, mimeType: 'application/pdf', documentType: 'Affidavit or undertaking', status: 'Validated & Ready' },
+        { filename: 'kaveri_faculty_cadre_2026.pdf', fileSizeBytes: 480000, mimeType: 'application/pdf', documentType: 'Faculty record', status: 'Validated & Ready' },
+        { filename: 'kaveri_lab_infrastructure.pdf', fileSizeBytes: 615000, mimeType: 'application/pdf', documentType: 'Infrastructure evidence', status: 'Validated & Ready' },
+        { filename: 'kaveri_eoa_fee_challan.pdf', fileSizeBytes: 185000, mimeType: 'application/pdf', documentType: 'Fee payment evidence', status: 'Validated & Ready' },
+      ]);
+    } else {
+      setInstitutionId('INST-SAMPLE-303');
+      setInstitutionName('Western Ghats Institute of Robotics & Automation');
+      setInstitutionType('Private Technical Campus');
+      setState('Maharashtra');
+      setDistrict('Nagpur');
+      setCategory('Demonstration EoA Application');
+      setAcademicYear('2026–2027');
+      setContactName('Dr. Vikramaditya Kulkarni');
+      setContactEmail('director@wgi-robotics-demo.edu.in');
+      setContactPhone('+91-712-2789012');
+      setProgrammeName('B.Tech Robotics & Autonomous Systems');
+      setPreviousApprovedIntake(60);
+      setRequestedIntake(180);
+      setFacultyCountClaimed(34);
+      setBuiltUpAreaSqmClaimed(10800);
+      setUploadedFiles([
+        { filename: 'wgi_eoa_letter_2025.pdf', fileSizeBytes: 365000, mimeType: 'application/pdf', documentType: 'Approval letter', status: 'Validated & Ready' },
+        { filename: 'wgi_affidavit_2026.pdf', fileSizeBytes: 240000, mimeType: 'application/pdf', documentType: 'Affidavit or undertaking', status: 'Validated & Ready' },
+        { filename: 'wgi_naac_accreditation.pdf', fileSizeBytes: 420000, mimeType: 'application/pdf', documentType: 'Accreditation certificate', status: 'Validated & Ready' },
+        { filename: 'wgi_university_noc.pdf', fileSizeBytes: 310000, mimeType: 'application/pdf', documentType: 'NOC or permission', status: 'Validated & Ready' },
+        { filename: 'wgi_faculty_statement.pdf', fileSizeBytes: 495000, mimeType: 'application/pdf', documentType: 'Faculty record', status: 'Validated & Ready' },
+        { filename: 'wgi_building_safety_plan.pdf', fileSizeBytes: 680000, mimeType: 'application/pdf', documentType: 'Infrastructure evidence', status: 'Validated & Ready' },
+      ]);
+    }
+    addToast({
+      title: 'Sample Application Preset Loaded',
+      description: 'Pre-filled all 5 intake steps with realistic sample institutional data and documents.',
+      variant: 'info',
+    });
+  };
+
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       <div className="bg-white border border-[#DCE5EC] rounded-xl p-5 space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="font-display text-xl font-bold text-[#10243A]">
               Guided Regulatory Application Intake
             </h1>
             <p className="text-xs text-[#617384]">
-              Configurable category-specific checklist workflow with auditable submission
+              Configurable category-specific checklist workflow with one-click sample data presets
             </p>
           </div>
-          <span className="font-mono text-xs text-[#087F8C]">Step {step} of 5</span>
+          <span className="font-mono text-xs font-semibold text-[#2563EB] bg-blue-50 border border-blue-200 px-2.5 py-1 rounded-full">
+            Step {step} of 5
+          </span>
+        </div>
+
+        {/* One-Click Sample Data Presets Bar */}
+        <div className="p-3.5 rounded-xl bg-gradient-to-r from-[#EFF6FF] via-[#F0FDFA] to-[#F8FAFC] border border-[#BFDBFE] flex flex-wrap items-center justify-between gap-3">
+          <div className="text-xs font-semibold text-[#1E3A8A]">
+            Quick-Fill Sample Application Data:
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => applySamplePreset('APEX_AI')}
+              className="px-3 py-1.5 rounded-lg bg-white hover:bg-blue-50 text-[#1E40AF] border border-blue-200 text-xs font-semibold shadow-2xs transition-all cursor-pointer"
+            >
+              Sample 1: Apex AI Institute (Complete Package)
+            </button>
+            <button
+              type="button"
+              onClick={() => applySamplePreset('KAVERI_RENEWAL')}
+              className="px-3 py-1.5 rounded-lg bg-white hover:bg-teal-50 text-[#0F766E] border border-teal-200 text-xs font-semibold shadow-2xs transition-all cursor-pointer"
+            >
+              Sample 2: Kaveri Tech (Annual EoA Renewal)
+            </button>
+            <button
+              type="button"
+              onClick={() => applySamplePreset('HIMALAYA_ROBOTICS')}
+              className="px-3 py-1.5 rounded-lg bg-white hover:bg-amber-50 text-[#B45309] border border-amber-200 text-xs font-semibold shadow-2xs transition-all cursor-pointer"
+            >
+              Sample 3: Western Ghats Robotics (3x Intake Jump)
+            </button>
+          </div>
         </div>
 
         {/* Stepper Bar */}
@@ -1485,7 +1621,7 @@ export const ApplicationIntakePage: React.FC = () => {
                   <span>Ready for Auditable Submission</span>
                 </div>
                 <p className="text-[#617384]">
-                  Submitting this application persists the record in the database, mirrors metadata to Firestore, and records a tamper-evident SHA-256 audit trail event.
+                  Submitting this application persists the record in the local &amp; server sample database and records a tamper-evident SHA-256 audit trail event.
                 </p>
               </div>
             )}

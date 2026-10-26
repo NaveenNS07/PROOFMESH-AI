@@ -1898,6 +1898,16 @@ function registerApiRoutes() {
     }
   });
 
+  app.post('/api/v1/demo/reset', (_req: Request, res: Response) => {
+    db = createInitialSeedDatabase();
+    saveDatabase();
+    return res.json({
+      status: 'reset_complete',
+      applicationsCount: db.applications.length,
+      institutionsCount: db.institutions.length,
+    });
+  });
+
 }
 
 registerApiRoutes();

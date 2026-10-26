@@ -418,13 +418,13 @@ export const AuthPage: React.FC = () => {
   const handleGoogleSignIn = async () => {
     try {
       setLoading(true);
-      const fbUser = await signInWithGooglePopup();
-      if (fbUser) {
+      const sampleUser = await signInWithGooglePopup();
+      if (sampleUser) {
         await switchUserByEmailOrRole('admin@proofmesh-demo.gov.in', UserRole.REGULATORY_ADMIN);
         navigate('/dashboard');
       }
     } catch (err: any) {
-      setErrorMsg(err.message || 'Google Sign-In popup was closed or blocked.');
+      setErrorMsg(err.message || 'Unable to load sample officer account.');
     } finally {
       setLoading(false);
     }
@@ -453,7 +453,7 @@ export const AuthPage: React.FC = () => {
                 : 'Reset Workspace Password'}
             </h1>
             <p className="text-xs text-[#617384]">
-              Role-scoped access control enforced on backend APIs and Firestore security rules.
+              Role-scoped access control with pre-loaded synthetic sample institutions and applications.
             </p>
           </div>
 
@@ -566,9 +566,9 @@ export const AuthPage: React.FC = () => {
               <button
                 type="button"
                 onClick={handleGoogleSignIn}
-                className="w-full py-2 px-4 bg-[#F4F7FA] hover:bg-[#DCE5EC]/60 border border-[#DCE5EC] text-[#172B3A] text-xs font-medium rounded transition-colors"
+                className="w-full py-2 px-4 bg-[#F4F7FA] hover:bg-[#DCE5EC]/60 border border-[#DCE5EC] text-[#172B3A] text-xs font-semibold rounded transition-colors cursor-pointer"
               >
-                Sign In with Google (Firebase Auth)
+                One-Click Sample Admin Sign-In (Instant Demo Access)
               </button>
             </div>
           )}
