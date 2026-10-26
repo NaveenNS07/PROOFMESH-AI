@@ -641,6 +641,7 @@ export const AuthPage: React.FC = () => {
 // PAGE 21: PUBLIC INSTITUTION VERIFICATION (/public/verify)
 // ============================================================================
 export const PublicVerifyPage: React.FC = () => {
+  const { apiFetch } = useApp();
   const [query, setQuery] = useState('');
   const [stateFilter, setStateFilter] = useState('ALL');
   const [programmeFilter, setProgrammeFilter] = useState('');
@@ -655,8 +656,9 @@ export const PublicVerifyPage: React.FC = () => {
       if (query.trim()) params.set('query', query.trim());
       if (stateFilter !== 'ALL') params.set('state', stateFilter);
       if (programmeFilter.trim()) params.set('programme', programmeFilter.trim());
-      const res = await fetch(`/api/v1/public/institutions?${params.toString()}`);
-      const data = await res.json();
+      const data = await apiFetch<{ institutions: InstitutionRecord[]; disclaimer: string }>(
+        `/api/v1/public/institutions?${params.toString()}`
+      );
       setInstitutions(data.institutions || []);
       setDisclaimer(data.disclaimer || '');
     } catch {

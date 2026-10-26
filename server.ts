@@ -3,8 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import dotenv from 'dotenv';
 import { GoogleGenAI } from '@google/genai';
-import { createServer as createViteServer } from 'vite';
-import { createInitialSeedDatabase, DatabaseSchema, SYNTHETIC_BANNER } from './src/server/seedData.ts';
+import { createInitialSeedDatabase, DatabaseSchema, SYNTHETIC_BANNER } from './src/server/seedData';
 import {
   buildEvidenceGraphForApplication,
   checkCrossDocumentConsistency,
@@ -19,7 +18,7 @@ import {
   evaluateSimulatedSourceVerification,
   extractStructuredFieldsFromText,
   validateFileUpload,
-} from './src/engine/validationEngine.ts';
+} from './src/engine/validationEngine';
 import {
   ApplicationDocument,
   ApplicationRecord,
@@ -28,39 +27,43 @@ import {
   ReportRecord,
   UserRecord,
   UserRole,
-} from './src/types/domain.ts';
+} from './src/types/domain';
 
 dotenv.config();
 
-const DATA_DIR = path.resolve(process.cwd(), 'data');
+const DATA_DIR = process.env.VERCEL
+  ? '/tmp/proofmesh_data'
+  : path.resolve(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'proofmesh_db.json');
 
 function loadDatabase(): DatabaseSchema {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-  if (!fs.existsSync(DB_FILE)) {
-    const seed = createInitialSeedDatabase();
-    fs.writeFileSync(DB_FILE, JSON.stringify(seed, null, 2), 'utf-8');
-    return seed;
-  }
   try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    if (!fs.existsSync(DB_FILE)) {
+      const seed = createInitialSeedDatabase();
+      fs.writeFileSync(DB_FILE, JSON.stringify(seed, null, 2), 'utf-8');
+      return seed;
+    }
     const raw = fs.readFileSync(DB_FILE, 'utf-8');
     return JSON.parse(raw) as DatabaseSchema;
   } catch {
-    const seed = createInitialSeedDatabase();
-    fs.writeFileSync(DB_FILE, JSON.stringify(seed, null, 2), 'utf-8');
-    return seed;
+    return createInitialSeedDatabase();
   }
 }
 
 let db: DatabaseSchema = loadDatabase();
 
 function saveDatabase() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf-8');
+  } catch {
+    // On read-only serverless filesystems, keep state in memory
   }
-  fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf-8');
 }
 
 function appendAuditEvent(params: {
@@ -136,9 +139,10 @@ function getAiClient(): GoogleGenAI | null {
   });
 }
 
-async function startServer() {
-  const app = express();
-  app.use(express.json({ limit: '10mb' }));
+export const app = express();
+app.use(express.json({ limit: '10mb' }));
+
+function registerApiRoutes() {
 
   // ============================================================================
   // 1. AUTHENTICATION ENDPOINTS
@@ -1893,8 +1897,14 @@ async function startServer() {
     }
   });
 
-  // Mount Vite dev server or static production build
+}
+
+registerApiRoutes();
+
+async function startServer() {
+  // Mount Vite dev server or static production build when running as standalone server
   if (process.env.NODE_ENV !== 'production') {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
@@ -1908,10 +1918,14 @@ async function startServer() {
     });
   }
 
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT || 3000);
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`PROOFMESH AI Full-Stack Server listening on http://localhost:${PORT}`);
   });
 }
 
-startServer();
+if (!process.env.VERCEL) {
+  startServer();
+}
+
+export default app;

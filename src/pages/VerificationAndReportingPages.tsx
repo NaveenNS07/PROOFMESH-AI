@@ -506,14 +506,40 @@ export const ReportsCenterPage: React.FC = () => {
               <p className="text-xs text-[#617384] leading-relaxed">{rep.scope}</p>
               <div className="text-[11px] font-mono text-[#18794E]">{rep.disclaimer}</div>
             </div>
-            <a
-              href={`/api/v1/reports/${rep.id}/download?format=csv`}
-              download={`${rep.reportCode}.csv`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#DCE5EC] text-xs font-semibold text-[#10243A] hover:bg-[#F4F7FA]"
+            <button
+              type="button"
+              onClick={() => {
+                const csv = [
+                  'ReportCode,ReportType,ApplicationID,Institution,GeneratedBy,GeneratedAt,TotalFindings,Critical,High,Medium,Unresolved,Scope,Disclaimer',
+                  [
+                    rep.reportCode,
+                    `"${rep.reportType}"`,
+                    rep.applicationId,
+                    `"${rep.institutionName}"`,
+                    `"${rep.generatedBy}"`,
+                    rep.generatedAt,
+                    rep.findingsSummary.total,
+                    rep.findingsSummary.critical,
+                    rep.findingsSummary.high,
+                    rep.findingsSummary.medium,
+                    rep.findingsSummary.unresolved,
+                    `"${rep.scope.replace(/"/g, '""')}"`,
+                    `"${rep.disclaimer.replace(/"/g, '""')}"`,
+                  ].join(','),
+                ].join('\n');
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${rep.reportCode}.csv`;
+                a.click();
+                URL.revokeObjectURL(url);
+              }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#DCE5EC] text-xs font-semibold text-[#10243A] hover:bg-[#F4F7FA] cursor-pointer"
             >
               <Download className="w-3.5 h-3.5 text-[#087F8C]" />
               Export CSV
-            </a>
+            </button>
           </div>
         ))}
       </div>

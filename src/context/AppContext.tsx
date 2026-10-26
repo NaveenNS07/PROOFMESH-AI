@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { UserRecord, UserRole } from '../types/domain';
 import { signOutFirebase } from '../lib/firebase';
+import { executeLocalApiFallback } from '../lib/localApiFallback';
 
 interface ToastMessage {
   id: string;
@@ -82,8 +83,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         headers.set('Content-Type', 'application/json');
       }
       headers.set('x-user-id', currentUser.id);
-      const res = await fetch(url, { ...options, headers });
-      if (!res.ok) {
+      try {
+        const res = await fetch(url, { ...options, headers });
+        const contentType = res.headers.get('content-type') || '';
+        if (res.ok && contentType.includes('application/json')) {
+          return (await res.json()) as T;
+        }
+        if (!contentType.includes('application/json') || res.status === 404 || res.status >= 500) {
+          return await executeLocalApiFallback<T>(url, options, currentUser.id);
+        }
         let errMessage = `Request failed (${res.status})`;
         try {
           const errJson = await res.json();
@@ -94,8 +102,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           // ignore
         }
         throw new Error(errMessage);
+      } catch (err: any) {
+        if (err?.message?.includes('Request failed') || err?.message?.includes('not authorized')) {
+          throw err;
+        }
+        return await executeLocalApiFallback<T>(url, options, currentUser.id);
       }
-      return (await res.json()) as T;
     },
     [currentUser.id]
   );
@@ -123,39 +135,58 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const switchUserByEmailOrRole = useCallback(
     async (email?: string, role?: UserRole): Promise<UserRecord | null> => {
       try {
-        const res = await fetch('/api/v1/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, roleOverride: role }),
-        });
-        if (!res.ok) {
-          const err = await res.json();
-          addToast({
-            title: 'Authentication Error',
-            description: err.error || 'Unable to sign in with selected credentials.',
-            variant: 'critical',
+        let user: UserRecord | null = null;
+        try {
+          const res = await fetch('/api/v1/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, roleOverride: role }),
           });
-          return null;
+          const contentType = res.headers.get('content-type') || '';
+          if (res.ok && contentType.includes('application/json')) {
+            const data = await res.json();
+            user = data.user;
+          } else {
+            const fallback = await executeLocalApiFallback<{ user: UserRecord }>(
+              '/api/v1/auth/login',
+              {
+                method: 'POST',
+                body: JSON.stringify({ email, roleOverride: role }),
+              },
+              currentUser.id
+            );
+            user = fallback.user;
+          }
+        } catch {
+          const fallback = await executeLocalApiFallback<{ user: UserRecord }>(
+            '/api/v1/auth/login',
+            {
+              method: 'POST',
+              body: JSON.stringify({ email, roleOverride: role }),
+            },
+            currentUser.id
+          );
+          user = fallback.user;
         }
-        const data = await res.json();
-        setCurrentUser(data.user);
-        sessionStorage.setItem('pm_active_user', JSON.stringify(data.user));
+        if (!user) return null;
+        setCurrentUser(user);
+        sessionStorage.setItem('pm_active_user', JSON.stringify(user));
         addToast({
-          title: `Workspace Active: ${data.user.fullName}`,
-          description: `Role: ${data.user.role.replace(/_/g, ' ')}`,
+          title: `Workspace Active: ${user.fullName}`,
+          description: `Role: ${user.role.replace(/_/g, ' ')}`,
           variant: 'success',
         });
-        return data.user as UserRecord;
+        return user;
       } catch (e: any) {
         addToast({
           title: 'Login Failed',
-          description: e.message || 'Network error during authentication',
+          description: e.message || 'Unable to sign in with selected credentials.',
           variant: 'critical',
         });
         return null;
       }
     },
-    [addToast]
+    [addToast, currentUser.id]
   );
 
   const logout = useCallback(async () => {
